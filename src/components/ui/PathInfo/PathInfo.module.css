@@ -1,0 +1,28 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.homeLink {
+  color: var(--color-gray);
+  transition: color var(--transition-fast);
+}
+
+.homeLink:hover,
+.homeLink:focus-visible {
+  color: var(--color-main);
+}
+
+.separator {
+  color: var(--color-gray);
+}
+
+.currentPage {
+  color: var(--color-main);
+}

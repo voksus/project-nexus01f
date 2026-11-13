@@ -1,0 +1,36 @@
+{
+  "name": "project-nexus01f",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.14.0",
+    "axios": "^1.21.1",
+    "clsx": "^2.1.1",
+    "formik": "^2.4.9",
+    "modern-normalize": "^3.0.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-hot-toast": "^2.6.1",
+    "react-redux": "^9.3.1",
+    "react-router-dom": "^7.18.5",
+    "yup": "^1.7.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.7",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  }
+}

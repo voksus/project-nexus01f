@@ -1,9 +1,11 @@
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Loader } from "./components/ui/Loader/Loader.tsx";
 import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
+
+const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 
 const PagePlaceholder = ({ title }: { title: string }) => (
   <main className="container" style={{ padding: "48px 16px" }}>
@@ -21,10 +23,7 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           {/* [FE-04]: модалки; [FE-05], [FE-06]: HomePage */}
-          <Route
-            path="/"
-            element={<PagePlaceholder title="Foodies — HomePage" />}
-          />
+          <Route path="/" element={<HomePage />} />
 
           {/* [FE-07]: RecipePage */}
           <Route

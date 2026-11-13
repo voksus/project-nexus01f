@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <title>Recipe image placeholder</title>
   <rect width="400" height="400" fill="#1A1A1A"/>
   <g stroke="#BFBEBE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="200" cy="200" r="58"/>

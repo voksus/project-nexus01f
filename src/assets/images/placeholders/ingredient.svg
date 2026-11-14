@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <title>Ingredient image placeholder</title>
+  <rect width="100" height="100" fill="#F2F2F2"/>
+  <g stroke="#BFBEBE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M50 34c-12-8-28 0-28 16 0 16 14 28 28 28s28-12 28-28c0-16-16-24-28-16z"/>
+    <path d="M50 34c0-6 2-10 6-13M50 30c-4-6-10-8-15-6 3 5 9 8 15 6z"/>
+  </g>
+</svg>

@@ -1,0 +1,68 @@
+/* Figma: фрейм Menu 375×812, виїжджає справа */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow-y: auto;
+  padding: 24px;
+  background-color: var(--color-main);
+  color: var(--color-white);
+  visibility: hidden;
+  transform: translateX(100%);
+  /* Ховаємо лише після того, як меню виїхало за екран */
+  transition:
+    transform 300ms ease-out,
+    visibility 0s linear 300ms;
+  --nav-color: var(--color-white);
+  --nav-active-border: var(--color-gray);
+}
+
+/* Показуємо одразу, щоб кнопку закриття можна було сфокусувати при відкритті */
+.open {
+  visibility: visible;
+  transform: translateX(0);
+  transition: transform 300ms ease-out;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+}
+
+.close {
+  display: flex;
+  color: var(--color-white);
+  transition: opacity var(--transition-fast);
+}
+
+.close:hover,
+.close:focus-visible {
+  opacity: 0.7;
+}
+
+.closeIcon {
+  width: 28px;
+  height: 28px;
+}
+
+/* Навігація по центру на висоті 258px від верху екрана */
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-top: 196px;
+}
+
+@media screen and (min-width: 768px) {
+  .menu {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu,
+  .close {
+    transition: none;
+  }
+}

@@ -1,0 +1,163 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.imageWrapper {
+  height: 230px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: var(--color-dark);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  overflow: hidden;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--color-main);
+}
+
+.description {
+  display: -webkit-box;
+  min-height: 40px;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: var(--color-dark);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.owner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: var(--color-dark);
+  transition: opacity var(--transition-fast);
+}
+
+.owner:hover,
+.owner:focus-visible {
+  opacity: 0.7;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: var(--color-gray);
+}
+
+.ownerName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 4px;
+}
+
+.iconButton {
+  display: flex;
+  padding: 10px;
+  border: 1px solid var(--color-gray);
+  border-radius: 50%;
+  color: var(--color-main);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.iconButton:hover,
+.iconButton:focus-visible,
+.iconButtonActive {
+  border-color: var(--color-main);
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.iconButton:disabled {
+  cursor: progress;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .imageWrapper {
+    height: 275px;
+    border-radius: var(--radius-lg);
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .description {
+    min-height: 48px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .owner {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .iconButton {
+    padding: 12px;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+}

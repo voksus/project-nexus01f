@@ -1,0 +1,186 @@
+/* Розміри — з Figma (Main / Main_tablet / Main_mobile → Categories) */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subtitle {
+  max-width: 531px;
+  color: var(--color-dark);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Mobile: одна колонка */
+.card {
+  position: relative;
+  flex: 1 1 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  /* Фон, поки немає фото категорії */
+  background-color: var(--color-dark);
+}
+
+.hiddenOnMobile {
+  display: none;
+}
+
+.controls {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  display: flex;
+  gap: 4px;
+}
+
+.name,
+.arrow {
+  border: 1px solid var(--border-white-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--color-white);
+}
+
+.name {
+  padding: 7px 11px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  background-color: var(--border-white-subtle);
+  backdrop-filter: blur(10px);
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background-color: transparent;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.arrow:hover,
+.arrow:focus-visible {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-main);
+}
+
+.arrowIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.cardAll {
+  background-color: var(--color-main);
+}
+
+.allButton {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+
+.allButton:hover,
+.allButton:focus-visible {
+  color: var(--color-gray);
+}
+
+/* Tablet: дві колонки, кожна 3-тя картка з п'яти — на всю ширину */
+@media screen and (min-width: 768px) {
+  .content {
+    gap: 40px;
+  }
+
+  .heading {
+    gap: 20px;
+  }
+
+  .list {
+    gap: 20px;
+  }
+
+  .card {
+    flex: 0 0 calc((100% - 20px) / 2);
+    height: 369px;
+    border-radius: var(--radius-lg);
+  }
+
+  .card:nth-child(5n + 3) {
+    flex-basis: 100%;
+  }
+
+  .hiddenOnMobile {
+    display: block;
+  }
+
+  .controls {
+    bottom: 24px;
+    left: 24px;
+  }
+
+  .name {
+    padding: 9px 13px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .allButton {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+
+/* Desktop: рядки по 3 картки 325/325/590, широка картка змінює позицію з кроком 12 */
+@media screen and (min-width: 1440px) {
+  .card,
+  .card:nth-child(5n + 3) {
+    flex-basis: calc((100% - 40px) * 325 / 1240);
+  }
+
+  .card:nth-child(12n + 3),
+  .card:nth-child(12n + 4),
+  .card:nth-child(12n + 8),
+  .card:nth-child(12n + 10) {
+    flex-basis: calc((100% - 40px) * 590 / 1240);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow,
+  .allButton {
+    transition: none;
+  }
+}

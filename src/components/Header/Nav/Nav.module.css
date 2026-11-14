@@ -1,0 +1,57 @@
+/* Колір тексту й рамки активного пункту задає тема Header через --nav-color / --nav-active-border */
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  display: block;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--nav-color, var(--color-white));
+  transition:
+    border-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.link:hover,
+.link:focus-visible {
+  opacity: 0.7;
+}
+
+.active {
+  border-color: var(--nav-active-border, var(--color-gray));
+}
+
+.header {
+  gap: 40px;
+}
+
+.header .link {
+  padding: 13px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.menu {
+  flex-direction: column;
+  gap: 24px;
+}
+
+.menu .link {
+  min-width: 111px;
+  padding: 13px 20px;
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link {
+    transition: none;
+  }
+}

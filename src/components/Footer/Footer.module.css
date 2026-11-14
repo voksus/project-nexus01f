@@ -1,0 +1,85 @@
+/* Figma: Footer 375×136 / 768×144 / 1440×144 + відступ до низу сторінки 32 / 32 / 72px */
+
+/* Відступи між рядками через gap: margin/padding на .top перебиває глобальний .container */
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: auto;
+  padding-bottom: 32px;
+  color: var(--color-main);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.socials {
+  display: flex;
+  gap: 16px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-gray);
+  border-radius: 50%;
+  color: var(--color-main);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.social:hover,
+.social:focus-visible {
+  border-color: var(--color-main);
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.socialIcon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Лінія на всю ширину вікна, текст по центру — контейнер тут не потрібен */
+.copyright {
+  padding: 40px 16px 0;
+  border-top: 1px solid var(--color-gray);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-dark);
+}
+
+@media screen and (min-width: 768px) {
+  .social {
+    width: 40px;
+    height: 40px;
+  }
+
+  .copyright {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer {
+    padding-bottom: 72px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social {
+    transition: none;
+  }
+}

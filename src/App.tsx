@@ -1,9 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { PrivateRoute } from "./components/auth/PrivateRoute.tsx";
 import { Loader } from "./components/ui/Loader/Loader.tsx";
 import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
+import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 
@@ -17,6 +19,7 @@ const PagePlaceholder = ({ title }: { title: string }) => (
 );
 
 export const App = () => {
+  useAuthLifecycle();
   return (
     <>
       <Toaster position="top-right" />
@@ -34,14 +37,22 @@ export const App = () => {
           {/* [FE-08]: AddRecipePage (канонічний шлях /recipe/add + редірект з /add за рішенням #6) */}
           <Route
             path="/recipe/add"
-            element={<PagePlaceholder title="Add Recipe Page" />}
+            element={
+              <PrivateRoute>
+                <PagePlaceholder title="Add Recipe Page" />
+              </PrivateRoute>
+            }
           />
           <Route path="/add" element={<Navigate to="/recipe/add" replace />} />
 
-          {/* [FE-09]: UserPage (PrivateRoute буде підключено в [FE-02]) */}
+          {/* [FE-09]: UserPage */}
           <Route
             path="/user/:id"
-            element={<PagePlaceholder title="User Profile Page" />}
+            element={
+              <PrivateRoute>
+                <PagePlaceholder title="User Profile Page" />
+              </PrivateRoute>
+            }
           />
 
           {/* TODO [FE-03] (404)*/}

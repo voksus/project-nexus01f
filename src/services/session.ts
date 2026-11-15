@@ -163,7 +163,6 @@ export function createAuthSession(options: SessionOptions) {
           (error.response?.status === 401 || error.response?.status === 403)
         ) {
           invalidate();
-          options.onNavigateHome();
         }
         throw error;
       } finally {
@@ -211,7 +210,6 @@ export function createAuthSession(options: SessionOptions) {
         throw error;
       if (config.sessionRetried) {
         invalidate();
-        options.onNavigateHome();
         throw error;
       }
       config.sessionRetried = true;

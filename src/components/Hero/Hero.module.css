@@ -1,0 +1,243 @@
+/*
+ * Розміри та позиції — з Figma (Main_mobile / Main_tablet / Main).
+ * Зображення вже повернуті й мають розмір своєї обмежувальної рамки,
+ * тому позиції рахуються від центру Hero. Блок зображень іде в потоці
+ * після кнопки: якщо заголовок переноситься (гумова верстка 320px),
+ * Hero стає вищим, а не накриває кнопку.
+ */
+
+.section {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Верхній відступ лишає місце для Header з SharedLayout ([FE-03]) */
+  padding: 194px 16px 92px;
+  border-radius: 20px;
+  background-color: var(--color-main);
+  overflow: hidden;
+  text-align: center;
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--border-white-subtle),
+    transparent
+  );
+}
+
+/* На мобільному в макеті видима лише одна лінія */
+.line:nth-child(1) {
+  left: 16px;
+}
+
+.line:nth-child(n + 2) {
+  display: none;
+}
+
+.title {
+  max-width: 327px;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-white);
+}
+
+.subtitle {
+  max-width: 326px;
+  margin-top: 20px;
+  color: var(--color-white);
+}
+
+.button {
+  position: relative;
+  z-index: 1;
+  margin-top: 20px;
+  /* Рамка входить у розмір кнопки з макета */
+  padding: 11px 23px;
+  border: 1px solid var(--color-white);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.button:hover,
+.button:focus-visible {
+  background-color: var(--color-white);
+  color: var(--color-main);
+}
+
+.images {
+  position: relative;
+  align-self: stretch;
+  height: 216px;
+  margin-top: 30px;
+}
+
+.imageMain,
+.imageSmall {
+  position: absolute;
+}
+
+.imageMain {
+  top: 0;
+  left: calc(50% - 64px);
+}
+
+.imageSmall {
+  top: 132px;
+  left: calc(50% - 166px);
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    max-width: 768px;
+    padding: 16px;
+  }
+
+  .hero {
+    /* Бокові відступи менші за макетні 29px, щоб заголовок не переносився,
+       коли смуга прокрутки забирає частину ширини */
+    padding: 217px 16px 81px;
+    border-radius: 30px;
+  }
+
+  .line:nth-child(n + 2) {
+    display: block;
+  }
+
+  .line:nth-child(1) {
+    left: 32px;
+  }
+
+  .line:nth-child(2) {
+    left: 229px;
+  }
+
+  .line:nth-child(3) {
+    right: 240px;
+  }
+
+  .line:nth-child(4) {
+    right: 32px;
+  }
+
+  .title {
+    max-width: 678px;
+    font-size: 70px;
+  }
+
+  .subtitle {
+    max-width: 577px;
+    margin-top: 40px;
+  }
+
+  .button {
+    margin-top: 40px;
+    padding: 15px 31px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .images {
+    height: 340px;
+  }
+
+  .imageMain {
+    left: calc(50% - 101px);
+  }
+
+  .imageMain img {
+    width: 353px;
+    height: 330px;
+  }
+
+  .imageSmall {
+    top: 202px;
+    left: calc(50% - 274px);
+  }
+
+  .imageSmall img {
+    width: 148px;
+    height: 139px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .section {
+    max-width: 1440px;
+    padding: 20px;
+  }
+
+  .hero {
+    padding-top: 154px;
+    padding-bottom: 92px;
+  }
+
+  .line:nth-child(1) {
+    left: 60px;
+  }
+
+  .line:nth-child(2) {
+    left: 257px;
+  }
+
+  .line:nth-child(3) {
+    right: 268px;
+  }
+
+  .line:nth-child(4) {
+    right: 60px;
+  }
+
+  .title {
+    max-width: 875px;
+    font-size: 90px;
+  }
+
+  .images {
+    height: 330px;
+  }
+
+  .imageMain {
+    left: calc(50% - 102px);
+  }
+
+  .imageSmall {
+    top: 171px;
+    left: calc(50% - 273px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

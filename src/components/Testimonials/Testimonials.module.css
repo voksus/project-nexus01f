@@ -1,0 +1,149 @@
+/* Розміри — з Figma (компонент Testimonials: Mobile / Tablet / default) */
+
+.content {
+  position: relative;
+  text-align: center;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subtitle {
+  color: var(--color-dark);
+}
+
+.quote {
+  position: absolute;
+  top: 80px;
+  left: 24px;
+  width: 40px;
+  height: 32px;
+  color: var(--color-gray);
+}
+
+.slides {
+  display: grid;
+  margin-top: 64px;
+}
+
+.slide {
+  grid-area: 1 / 1;
+  margin: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 400ms ease-out,
+    visibility 400ms ease-out;
+}
+
+.slideActive {
+  visibility: visible;
+  opacity: 1;
+}
+
+.text {
+  min-height: 120px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: -0.02em;
+  color: var(--color-main);
+}
+
+.author {
+  margin-top: 64px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: var(--color-gray);
+  transition: background-color var(--transition-fast);
+}
+
+.dot[aria-current="true"] {
+  background-color: var(--color-main);
+}
+
+.dot:hover,
+.dot:focus-visible {
+  background-color: var(--color-dark);
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    max-width: 822px;
+  }
+
+  .quote {
+    top: 76px;
+    left: 72px;
+    width: 59px;
+    height: 48px;
+  }
+
+  .slides {
+    margin-top: 80px;
+  }
+
+  .text {
+    min-height: 108px;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  .author {
+    margin-top: 80px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .dots {
+    gap: 12px;
+  }
+
+  .dot {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .content {
+    /* Контейнер має бокові відступи 80px, а блок у макеті вужчий — 822px */
+    max-width: 822px;
+    padding: 0;
+  }
+
+  .quote {
+    left: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slide {
+    transition: none;
+  }
+
+  .dot {
+    transition: none;
+  }
+}

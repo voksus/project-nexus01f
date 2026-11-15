@@ -7,6 +7,7 @@ import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
+const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
 );
@@ -29,10 +30,7 @@ export const App = () => {
         {/* Темний Header: сторінки, що починаються з чорного блоку */}
         <Route element={<SharedLayout headerTheme="dark" />}>
           {/* [FE-04]: модалки; [FE-05], [FE-06]: HomePage */}
-          <Route
-            path="/"
-            element={<PagePlaceholder title="Foodies — HomePage" />}
-          />
+          <Route path="/" element={<HomePage />} />
 
           <Route path="*" element={<NotFoundPage />} />
         </Route>

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { Icon } from "../ui/Icon/Icon.tsx";
 import { MainTitle } from "../ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "../ui/Subtitle/Subtitle.tsx";
 import styles from "./Categories.module.css";
@@ -8,23 +9,6 @@ import {
   COLLAPSED_COUNT,
   COLLAPSED_COUNT_MOBILE,
 } from "./categories.ts";
-
-// TODO [FE-00]: замінити на іконку arrow-up-right зі спрайту icons.svg, коли він з'явиться
-const ArrowIcon = () => (
-  <svg
-    className={styles.arrowIcon}
-    viewBox="0 0 18 18"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    focusable="false"
-  >
-    <path d="m5.25 12.75 7.5-7.5m-7.5 0h7.5v7.5" />
-  </svg>
-);
 
 interface CategoriesProps {
   /** Назва категорії з БД */
@@ -70,7 +54,7 @@ export const Categories = ({ onSelect }: CategoriesProps) => {
                   aria-label={`Show ${label} recipes`}
                   onClick={() => onSelect(name)}
                 >
-                  <ArrowIcon />
+                  <Icon name="arrow-up-right" className={styles.arrowIcon} />
                 </button>
               </div>
             </li>

@@ -129,6 +129,23 @@ function harness(
 }
 
 describe("API and initialization", () => {
+  it.each([401, 403])(
+    "keeps a guest on the current page when initialization refresh returns %s",
+    async (status) => {
+      const h = harness({
+        api: () => ({ status: 401 }),
+        auth: () => ({ status }),
+      });
+      await h.session.initialize();
+      expect(h.authCalls.map((config) => config.url)).toEqual([
+        "/auth/refresh",
+      ]);
+      expect(h.onUser).not.toHaveBeenCalled();
+      expect(h.onReset).toHaveBeenCalledOnce();
+      expect(h.onNavigateHome).not.toHaveBeenCalled();
+    },
+  );
+
   it("uses the API prefix and cookies without bearer token persistence", () => {
     expect(configuredApi.defaults.baseURL).toBe("/api");
     expect(configuredApi.defaults.withCredentials).toBe(true);
@@ -208,6 +225,7 @@ describe("401 recovery", () => {
     expect(h.authCalls).toHaveLength(1);
     expect(h.calls).toHaveLength(2);
     expect(h.onReset).toHaveBeenCalled();
+    expect(h.onNavigateHome).not.toHaveBeenCalled();
   });
 
   it("does not recurse or refresh login, register, refresh or logout errors", async () => {
@@ -232,6 +250,7 @@ describe("401 recovery", () => {
     await expect(h.api.get("/private")).rejects.toBeInstanceOf(AxiosError);
     expect(h.calls).toHaveLength(1);
     expect(h.onReset).toHaveBeenCalledOnce();
+    expect(h.onNavigateHome).not.toHaveBeenCalled();
   });
 
   it("does not intercept non-401 failures or refresh a public 200 response", async () => {

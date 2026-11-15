@@ -40,6 +40,8 @@ Handle rejected login/register promises in the form. Error and loading selectors
 
 App initialization and online/storage listeners are attached by useAuthLifecycle. PrivateRoute protects /recipe/add and /user/:id until initialization completes and a user exists. StrictMode does not duplicate initialization requests. If the first lookup fails because of the network or a server error, an online event retries it. Explicit logout and pending-logout startup never trigger this auto-login recovery.
 
+Session expiry clears authentication without navigating away from public pages. PrivateRoute redirects guests to / and preserves the requested location in location.state.from. On successful login/register, the FE-04 modal should navigate to that location with replace: true when it exists; otherwise it should close without navigation. Login/register operations do not navigate themselves.
+
 ### Refresh
 
 A 401 on a normal API request triggers one shared refresh and one retry. Login, register, refresh and logout never trigger recursive refresh. Responses from a previous local session are rejected so that pending requests cannot repopulate state after logout. A refresh rejected with 401 or 403 clears the session. A network failure keeps the current user and does not create a refresh loop.

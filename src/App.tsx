@@ -1,13 +1,16 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { PrivateRoute } from "./components/auth/PrivateRoute.tsx";
-import { Loader } from "./components/ui/Loader/Loader.tsx";
+import { SharedLayout } from "./components/SharedLayout/SharedLayout.tsx";
 import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
+const NotFoundPage = lazy(
+  () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
+);
 
 const PagePlaceholder = ({ title }: { title: string }) => (
   <main className="container" style={{ padding: "48px 16px" }}>
@@ -23,11 +26,16 @@ export const App = () => {
   return (
     <>
       <Toaster position="top-right" />
-      <Suspense fallback={<Loader />}>
-        <Routes>
+      <Routes>
+        {/* Темний Header: сторінки, що починаються з чорного блоку */}
+        <Route element={<SharedLayout headerTheme="dark" />}>
           {/* [FE-04]: модалки; [FE-05], [FE-06]: HomePage */}
           <Route path="/" element={<HomePage />} />
 
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+
+        <Route element={<SharedLayout headerTheme="light" />}>
           {/* [FE-07]: RecipePage */}
           <Route
             path="/recipe/:id"
@@ -54,11 +62,8 @@ export const App = () => {
               </PrivateRoute>
             }
           />
-
-          {/* TODO [FE-03] (404)*/}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
+        </Route>
+      </Routes>
     </>
   );
 };

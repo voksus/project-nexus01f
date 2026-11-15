@@ -1,0 +1,45 @@
+.bar {
+  display: flex;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-white);
+}
+
+/* Рамка 1px входить у висоту кнопки, як у Figma: 38px на mobile, 46px від tablet */
+.button {
+  padding: 9px 15px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.active {
+  border-color: var(--color-gray);
+  background-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+.button:not(.active):hover,
+.button:not(.active):focus-visible {
+  color: var(--text-muted);
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    padding: 13px 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

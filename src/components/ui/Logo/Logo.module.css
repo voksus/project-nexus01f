@@ -1,0 +1,27 @@
+.logo {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: inherit;
+  transition: opacity var(--transition-fast);
+}
+
+.logo:hover,
+.logo:focus-visible {
+  opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    font-size: 24px;
+    line-height: 1.17;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    transition: none;
+  }
+}

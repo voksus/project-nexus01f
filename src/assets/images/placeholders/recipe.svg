@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <title>Recipe image placeholder</title>
+  <rect width="400" height="400" fill="#1A1A1A"/>
+  <g stroke="#BFBEBE" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="200" cy="200" r="58"/>
+    <circle cx="200" cy="200" r="36" stroke-opacity=".5"/>
+    <path d="M114 146v32a12 12 0 0 0 12 12v64M126 146v24M138 146v32a12 12 0 0 1-12 12"/>
+    <path d="M280 254V146c-14 8-20 26-20 46v18h20"/>
+  </g>
+</svg>

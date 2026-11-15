@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useCallback, useState } from "react";
-import { useAuthUser } from "../../hooks/useAuthUser.ts";
+import { selectUser } from "../../redux/auth/selectors.ts";
+import { useAppSelector } from "../../redux/hooks.ts";
 import { Icon } from "../ui/Icon/Icon.tsx";
 import { Logo } from "../ui/Logo/Logo.tsx";
 import { AuthBar } from "./AuthBar/AuthBar.tsx";
@@ -20,7 +21,7 @@ const openSignUp = () => undefined;
 const openLogOut = () => undefined;
 
 export const Header = ({ theme }: HeaderProps) => {
-  const user = useAuthUser();
+  const user = useAppSelector(selectUser);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 

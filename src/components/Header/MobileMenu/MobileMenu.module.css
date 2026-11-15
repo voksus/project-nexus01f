@@ -3,6 +3,8 @@
   position: fixed;
   inset: 0;
   z-index: 100;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   padding: 24px;
   background-color: var(--color-main);
@@ -52,6 +54,32 @@
   display: flex;
   justify-content: center;
   margin-top: 196px;
+}
+
+/*
+ * Figma: рамки фото 89×84 (left 26.64, top 580) і 222×208 (left 116, top 487.5)
+ * у фреймі 375×812. Блок притиснутий донизу, на низьких екранах іде в потоці під навігацією.
+ */
+.images {
+  position: relative;
+  flex-shrink: 0;
+  height: 208px;
+  margin-top: auto;
+  margin-bottom: 91px;
+  padding-top: 40px;
+  box-sizing: content-box;
+}
+
+.imageSmall {
+  position: absolute;
+  top: 132px;
+  left: 3px;
+}
+
+.imageMain {
+  position: absolute;
+  top: 40px;
+  left: 92px;
 }
 
 @media screen and (min-width: 768px) {

@@ -14,20 +14,13 @@
 }
 
 .avatar {
-  display: flex;
   flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
   width: 32px;
   height: 32px;
   margin-right: 2px;
   border-radius: 50%;
   object-fit: cover;
   background-color: var(--color-gray);
-  font-size: 14px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--color-main);
 }
 
 .name {
@@ -104,7 +97,6 @@
   .avatar {
     width: 50px;
     height: 50px;
-    font-size: 18px;
   }
 
   .name {

@@ -1,5 +1,13 @@
 import clsx from "clsx";
 import { useEffect, useRef } from "react";
+import heroMainMobilePng2x from "../../../assets/images/hero/hero-main-mobile@2x.png";
+import heroMainMobileWebp2x from "../../../assets/images/hero/hero-main-mobile@2x.webp";
+import heroMainMobilePng from "../../../assets/images/hero/hero-main-mobile.png";
+import heroMainMobileWebp from "../../../assets/images/hero/hero-main-mobile.webp";
+import heroSmallMobilePng2x from "../../../assets/images/hero/hero-small-mobile@2x.png";
+import heroSmallMobileWebp2x from "../../../assets/images/hero/hero-small-mobile@2x.webp";
+import heroSmallMobilePng from "../../../assets/images/hero/hero-small-mobile.png";
+import heroSmallMobileWebp from "../../../assets/images/hero/hero-small-mobile.webp";
 import { Icon } from "../../ui/Icon/Icon.tsx";
 import { Logo } from "../../ui/Logo/Logo.tsx";
 import { Nav } from "../Nav/Nav.tsx";
@@ -64,7 +72,35 @@ export const MobileMenu = ({ isOpen, onClose }: MobileMenuProps) => {
         <Nav variant="menu" onNavigate={onClose} />
       </div>
 
-      {/* TODO [FE-00]: фото страв (hero-*-mobile з #1) внизу меню, як у Figma */}
+      {/* Декоративні фото страв, як у Hero: поворот і скруглення вже є в самих зображеннях */}
+      <div className={styles.images} aria-hidden="true">
+        <picture className={styles.imageSmall}>
+          <source
+            type="image/webp"
+            srcSet={`${heroSmallMobileWebp} 1x, ${heroSmallMobileWebp2x} 2x`}
+          />
+          <img
+            src={heroSmallMobilePng}
+            srcSet={`${heroSmallMobilePng} 1x, ${heroSmallMobilePng2x} 2x`}
+            width={89}
+            height={84}
+            alt=""
+          />
+        </picture>
+        <picture className={styles.imageMain}>
+          <source
+            type="image/webp"
+            srcSet={`${heroMainMobileWebp} 1x, ${heroMainMobileWebp2x} 2x`}
+          />
+          <img
+            src={heroMainMobilePng}
+            srcSet={`${heroMainMobilePng} 1x, ${heroMainMobilePng2x} 2x`}
+            width={222}
+            height={208}
+            alt=""
+          />
+        </picture>
+      </div>
     </div>
   );
 };

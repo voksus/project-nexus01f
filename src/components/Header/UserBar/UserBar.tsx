@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import avatarPlaceholder from "../../../assets/images/placeholders/avatar.svg";
 import type { UserShort } from "../../../types/api.ts";
 import { Icon } from "../../ui/Icon/Icon.tsx";
 import styles from "./UserBar.module.css";
@@ -58,14 +59,11 @@ export const UserBar = ({ user, onLogout }: UserBarProps) => {
         aria-controls={menuId}
         onClick={() => setIsOpen((open) => !open)}
       >
-        {/* TODO [FE-00]: заглушка avatar.svg (#1) замість літери, коли аватара немає */}
-        {user.avatar ? (
-          <img className={styles.avatar} src={user.avatar} alt="" />
-        ) : (
-          <span className={styles.avatar} aria-hidden="true">
-            {user.name.charAt(0)}
-          </span>
-        )}
+        <img
+          className={styles.avatar}
+          src={user.avatar ?? avatarPlaceholder}
+          alt=""
+        />
         <span className={styles.name}>{user.name}</span>
         <Icon
           name="chevron-down"

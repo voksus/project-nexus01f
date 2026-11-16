@@ -1,10 +1,21 @@
 import { combineReducers, type UnknownAction } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/authSlice.ts";
+import { referencesReducer } from "./references/referencesSlice.ts";
 import { sessionCleared } from "./sessionActions.ts";
 
-const appReducer = combineReducers({ auth: authReducer });
+const appReducer = combineReducers({
+  auth: authReducer,
+  references: referencesReducer,
+});
 
+type AppState = ReturnType<typeof appReducer>;
+
+// Public references survive the session reset
 export const rootReducer = (
-  state: ReturnType<typeof appReducer> | undefined,
+  state: AppState | undefined,
   action: UnknownAction,
-) => appReducer(sessionCleared.match(action) ? undefined : state, action);
+) =>
+  appReducer(
+    sessionCleared.match(action) ? { references: state?.references } : state,
+    action,
+  );

@@ -1,8 +1,11 @@
 .section {
+  scroll-margin-top: 16px;
+}
+
+.inner {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  scroll-margin-top: 16px;
 }
 
 .header {
@@ -103,7 +106,7 @@
 }
 
 @media screen and (min-width: 768px) {
-  .section {
+  .inner {
     gap: 40px;
   }
 

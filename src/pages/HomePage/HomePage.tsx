@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Categories } from "../../components/Categories/Categories.tsx";
 import { Hero } from "../../components/Hero/Hero.tsx";
+import { Recipes } from "../../components/Recipes/Recipes.tsx";
 import { Testimonials } from "../../components/Testimonials/Testimonials.tsx";
 import { selectIsAuthenticated } from "../../redux/auth/selectors.ts";
 import { useAppSelector } from "../../redux/hooks.ts";
@@ -27,10 +28,7 @@ const HomePage = () => {
       {category === null ? (
         <Categories onSelect={setCategory} />
       ) : (
-        // TODO [FE-06]: <Recipes category={category} onBack={() => setCategory(null)} />
-        <button type="button" onClick={() => setCategory(null)}>
-          Back to categories ({category})
-        </button>
+        <Recipes category={category} onBack={() => setCategory(null)} />
       )}
       <Testimonials />
     </main>

@@ -20,9 +20,7 @@ const toOptions = (
   allLabel: string,
 ): SelectOption[] => [
   { value: "", label: allLabel },
-  ...items
-    .map(({ id, name }) => ({ value: id, label: name }))
-    .sort((a, b) => a.label.localeCompare(b.label)),
+  ...items.map(({ id, name }) => ({ value: id, label: name })),
 ];
 
 export const RecipeFilters = ({

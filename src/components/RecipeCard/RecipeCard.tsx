@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import type { SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
-import avatarPlaceholder from "../../../assets/images/placeholders/avatar.svg";
-import recipePlaceholder from "../../../assets/images/placeholders/recipe.svg";
-import { useAuthGate } from "../../../hooks/useAuthGate.ts";
-import { useFavorite } from "../../../hooks/useFavorite.ts";
-import type { RecipeCardItem } from "../../../types/api.ts";
-import { Icon } from "../../ui/Icon/Icon.tsx";
+import avatarPlaceholder from "../../assets/images/placeholders/avatar.svg";
+import recipePlaceholder from "../../assets/images/placeholders/recipe.svg";
+import { useAuthGate } from "../../hooks/useAuthGate.ts";
+import { useFavorite } from "../../hooks/useFavorite.ts";
+import type { RecipeCardItem } from "../../types/api.ts";
+import { Icon } from "../ui/Icon/Icon.tsx";
 import styles from "./RecipeCard.module.css";
 
 interface RecipeCardProps {

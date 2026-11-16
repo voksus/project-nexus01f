@@ -1,0 +1,78 @@
+/* UI Kit: input / text area states */
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--color-gray);
+  transition: border-color var(--transition-fast);
+}
+
+.wrapper:focus-within {
+  border-bottom-color: var(--text-muted);
+}
+
+.textarea {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--color-dark);
+  resize: none;
+  outline: none;
+}
+
+.textarea::placeholder {
+  color: var(--color-gray);
+}
+
+.counter {
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--color-gray);
+}
+
+.count {
+  color: var(--color-main);
+}
+
+.invalid,
+.invalid:focus-within {
+  border-bottom-color: var(--color-error);
+}
+
+.invalid .textarea,
+.invalid .textarea::placeholder,
+.invalid .counter,
+.invalid .count {
+  color: var(--color-error);
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    gap: 40px;
+  }
+
+  .textarea,
+  .counter {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper {
+    transition: none;
+  }
+}

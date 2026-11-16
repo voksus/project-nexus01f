@@ -1,0 +1,161 @@
+/* Figma: 48px field on mobile, 56px from tablet */
+
+.root {
+  position: relative;
+  width: 100%;
+}
+
+.control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-white);
+  transition: border-color var(--transition-fast);
+}
+
+.control:hover,
+.control:focus-within {
+  border-color: var(--color-main);
+}
+
+.invalid,
+.invalid:hover,
+.invalid:focus-within {
+  border-color: var(--color-error);
+}
+
+.disabled {
+  opacity: 0.6;
+}
+
+.field {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 44px 13px 14px;
+  border: none;
+  border-radius: inherit;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--color-main);
+  outline: none;
+}
+
+.field:disabled {
+  cursor: not-allowed;
+}
+
+.input::placeholder,
+.placeholder {
+  color: var(--color-gray);
+}
+
+/* Selected label shown as the placeholder while searching */
+.input[aria-expanded="true"]::placeholder {
+  color: var(--text-muted);
+}
+
+.invalid .input::placeholder,
+.invalid .placeholder {
+  color: var(--color-error);
+}
+
+.label {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  position: absolute;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  transition: transform var(--transition-fast);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.list {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  left: 0;
+  z-index: 15;
+  max-height: 286px;
+  padding: 13px 18px;
+  overflow-y: auto;
+  border: 1px solid var(--border-light);
+  border-radius: 15px;
+  background-color: var(--color-white);
+  box-shadow: 0 8px 24px var(--border-light);
+  overscroll-behavior: contain;
+}
+
+.option,
+.empty {
+  padding-block: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+}
+
+.option {
+  cursor: pointer;
+  color: var(--color-main);
+  transition: color var(--transition-fast);
+}
+
+.active {
+  color: var(--text-muted);
+}
+
+.selected {
+  font-weight: 700;
+}
+
+.empty {
+  color: var(--color-gray);
+}
+
+@media screen and (min-width: 768px) {
+  .field {
+    padding: 15px 48px 15px 18px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .chevron {
+    right: 18px;
+  }
+
+  .list {
+    max-height: 326px;
+    padding: 16px 18px;
+  }
+
+  .option,
+  .empty {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control,
+  .chevron,
+  .option {
+    transition: none;
+  }
+}

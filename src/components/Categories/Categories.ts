@@ -10,7 +10,7 @@ export interface CategoryItem {
 export const CATEGORIES: CategoryItem[] = [
   { name: "Beef" },
   { name: "Breakfast" },
-  { name: "Dessert", label: "Desserts" },
+  { name: "Dessert" },
   { name: "Lamb" },
   { name: "Goat" },
   { name: "Miscellaneous" },

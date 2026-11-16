@@ -34,6 +34,19 @@
   background-color: var(--color-dark);
 }
 
+.picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .hiddenOnMobile {
   display: none;
 }
@@ -44,6 +57,7 @@
   left: 16px;
   display: flex;
   gap: 4px;
+  z-index: 1;
 }
 
 .name,

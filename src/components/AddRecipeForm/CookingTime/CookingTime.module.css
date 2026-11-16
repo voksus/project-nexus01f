@@ -1,0 +1,104 @@
+/* Figma: 48px buttons on mobile, 56px from tablet */
+
+.root {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.step {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-pill);
+  color: var(--color-main);
+  transition: border-color var(--transition-fast);
+}
+
+.step:hover:not([aria-disabled="true"]),
+.step:focus-visible {
+  border-color: var(--color-main);
+}
+
+.step[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Fits "1440 min" so the buttons don't shift */
+.value {
+  min-width: 68px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-main);
+  cursor: text;
+}
+
+.input {
+  width: 68px;
+  border-bottom: 1px solid var(--text-muted);
+  border-radius: 0;
+  outline: none;
+}
+
+.pristine {
+  color: var(--color-gray);
+}
+
+.invalid {
+  color: var(--color-error);
+  border-bottom-color: var(--color-error);
+}
+
+@media screen and (min-width: 768px) {
+  .root {
+    gap: 16px;
+  }
+
+  .step {
+    width: 56px;
+    height: 56px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .value {
+    min-width: 76px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .input {
+    width: 76px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step {
+    transition: none;
+  }
+}

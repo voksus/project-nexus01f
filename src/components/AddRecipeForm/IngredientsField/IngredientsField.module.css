@@ -1,0 +1,251 @@
+/* Figma: stacked on mobile, one row from tablet */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.draftBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.draft {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.select {
+  width: 100%;
+}
+
+.measure {
+  width: 100%;
+  padding: 0 0 15px;
+  border: none;
+  border-bottom: 1px solid var(--color-gray);
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--color-main);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.measure::placeholder {
+  color: var(--color-gray);
+}
+
+.measure:focus {
+  border-bottom-color: var(--text-muted);
+}
+
+.measureInvalid,
+.measureInvalid:focus {
+  border-bottom-color: var(--color-error);
+}
+
+.measureInvalid::placeholder {
+  color: var(--color-error);
+}
+
+.error {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-error);
+}
+
+.addButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 19px;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.addButton:hover:not(:disabled),
+.addButton:focus-visible {
+  border-color: var(--color-main);
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+.addButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.addIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 155px;
+}
+
+.thumb {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  border: 1px solid var(--color-gray);
+  border-radius: 15px;
+}
+
+.image {
+  width: 55px;
+  height: 55px;
+  object-fit: contain;
+}
+
+/* Close button sits above the text, as in the mockup */
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+}
+
+.name {
+  overflow-wrap: break-word;
+  color: var(--color-main);
+}
+
+.amount {
+  overflow-wrap: break-word;
+  color: var(--color-gray);
+}
+
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 16px;
+  height: 16px;
+  color: var(--color-main);
+  transition: color var(--transition-fast);
+}
+
+/* Larger hit area */
+.remove::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.remove:hover,
+.remove:focus-visible {
+  color: var(--color-error);
+}
+
+.removeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .root {
+    gap: 40px;
+  }
+
+  .draft {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .select,
+  .measure {
+    flex: 1;
+    width: auto;
+  }
+
+  .measure {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .addButton {
+    padding: 15px 31px;
+    border-color: var(--color-main);
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .addIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .cards {
+    gap: 28px;
+  }
+
+  .card {
+    gap: 14px;
+    width: 178px;
+  }
+
+  .thumb {
+    width: 90px;
+    height: 90px;
+  }
+
+  .image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .text {
+    gap: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .measure,
+  .addButton,
+  .remove {
+    transition: none;
+  }
+}

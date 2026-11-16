@@ -35,43 +35,45 @@ export const Categories = ({ onSelect }: CategoriesProps) => {
         </div>
 
         <ul className={styles.list}>
-          {visible.map(({ name, label = name }, index) => (
-            <li
-              key={name}
-              className={clsx(
-                styles.card,
-                !isExpanded &&
-                  index >= COLLAPSED_COUNT_MOBILE &&
-                  styles.hiddenOnMobile,
-              )}
-            >
-              <picture className={styles.picture}>
-                <source
-                  type="image/webp"
-                  srcSet={`/images/categories/${name.toLowerCase()}.webp 1x, /images/categories/${name.toLowerCase()}@2x.webp 2x`}
-                />
-                <img
-                  src={`/images/categories/${name.toLowerCase()}.png`}
-                  srcSet={`/images/categories/${name.toLowerCase()}.png 1x, /images/categories/${name.toLowerCase()}@2x.png 2x`}
-                  alt={`${label} category`}
-                  loading="lazy"
-                  className={styles.image}
-                />
-              </picture>
-
-              <div className={styles.controls}>
-                <span className={styles.name}>{label}</span>
-                <button
-                  type="button"
-                  className={styles.arrow}
-                  aria-label={`Show ${label} recipes`}
-                  onClick={() => onSelect(name)}
-                >
-                  <Icon name="arrow-up-right" className={styles.arrowIcon} />
-                </button>
-              </div>
-            </li>
-          ))}
+          {visible.map(({ name }, index) => {
+            const slug = name.toLowerCase();
+            return (
+              <li
+                key={name}
+                className={clsx(
+                  styles.card,
+                  !isExpanded &&
+                    index >= COLLAPSED_COUNT_MOBILE &&
+                    styles.hiddenOnMobile,
+                )}
+              >
+                <picture className={styles.picture}>
+                  <source
+                    type="image/webp"
+                    srcSet={`/images/categories/${slug}.webp 1x, /images/categories/${slug}@2x.webp 2x`}
+                  />
+                  <img
+                    className={styles.image}
+                    src={`/images/categories/${slug}.png`}
+                    srcSet={`/images/categories/${slug}.png 1x, /images/categories/${slug}@2x.png 2x`}
+                    alt={name}
+                    loading="lazy"
+                  />
+                </picture>
+                <div className={styles.controls}>
+                  <span className={styles.name}>{name}</span>
+                  <button
+                    type="button"
+                    className={styles.arrow}
+                    aria-label={`Show ${name} recipes`}
+                    onClick={() => onSelect(name)}
+                  >
+                    <Icon name="arrow-up-right" className={styles.arrowIcon} />
+                  </button>
+                </div>
+              </li>
+            );
+          })}
 
           {/* Рішення команди #14: «All categories» довантажує решту категорій і після цього зникає */}
           {!isExpanded && (

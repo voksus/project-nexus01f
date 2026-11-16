@@ -8,7 +8,7 @@ import {
   CATEGORIES,
   COLLAPSED_COUNT,
   COLLAPSED_COUNT_MOBILE,
-} from "./categories.ts";
+} from "./Categories.ts";
 
 interface CategoriesProps {
   /** Назва категорії з БД */
@@ -45,7 +45,20 @@ export const Categories = ({ onSelect }: CategoriesProps) => {
                   styles.hiddenOnMobile,
               )}
             >
-              {/* TODO [FE-00]: фото категорії, коли Serhii додасть зображення 1x/2x */}
+              <picture className={styles.picture}>
+                <source
+                  type="image/webp"
+                  srcSet={`/images/categories/${name.toLowerCase()}.webp 1x, /images/categories/${name.toLowerCase()}@2x.webp 2x`}
+                />
+                <img
+                  src={`/images/categories/${name.toLowerCase()}.png`}
+                  srcSet={`/images/categories/${name.toLowerCase()}.png 1x, /images/categories/${name.toLowerCase()}@2x.png 2x`}
+                  alt={`${label} category`}
+                  loading="lazy"
+                  className={styles.image}
+                />
+              </picture>
+
               <div className={styles.controls}>
                 <span className={styles.name}>{label}</span>
                 <button

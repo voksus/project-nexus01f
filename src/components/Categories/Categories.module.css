@@ -34,6 +34,25 @@
   background-color: var(--color-dark);
 }
 
+.picture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-fast);
+}
+
+.card:hover .image {
+  transform: scale(1.05);
+}
+
 .hiddenOnMobile {
   display: none;
 }
@@ -44,6 +63,7 @@
   left: 16px;
   display: flex;
   gap: 4px;
+  z-index: 1;
 }
 
 .name,

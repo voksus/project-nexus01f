@@ -130,12 +130,24 @@ export const AddRecipeForm = () => {
   const describedBy = (name: keyof RecipeFormValues) =>
     errorOf(name) ? errorId(name) : undefined;
 
-  // Focus the first invalid field after a failed submit
+  // Smoothly scroll to and focus the first invalid field after a failed submit
   useEffect(() => {
     if (isSubmitting || submitCount === 0) return;
-    formRef.current
-      ?.querySelector<HTMLElement>('[aria-invalid="true"]')
-      ?.focus();
+    const field = formRef.current?.querySelector<HTMLElement>(
+      '[aria-invalid="true"]',
+    );
+    if (!field) return;
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    // The visually hidden photo input scrolls via its visible wrapper
+    const target =
+      field.offsetWidth > 1 ? field : (field.parentElement ?? field);
+    target.scrollIntoView({
+      behavior: reduceMotion ? "auto" : "smooth",
+      block: "center",
+    });
+    field.focus({ preventScroll: true });
   }, [isSubmitting, submitCount]);
 
   const handleClear = () => {
@@ -288,7 +300,6 @@ export const AddRecipeForm = () => {
                 id="recipe-ingredient"
                 value={values.ingredients}
                 onChange={(list) => void setFieldValue("ingredients", list)}
-                onBlur={() => void setFieldTouched("ingredients", true)}
                 ingredients={ingredients.items}
                 ingredientsById={ingredientsById}
                 disabled={ingredients.status !== "succeeded"}
@@ -299,7 +310,7 @@ export const AddRecipeForm = () => {
           </div>
 
           {referenceError && (
-            <p className={styles.error} role="alert">
+            <p className={styles.notice} role="alert">
               Some lists failed to load.{" "}
               <button
                 type="button"

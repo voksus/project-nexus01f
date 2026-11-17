@@ -7,9 +7,7 @@
 }
 
 .photo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  position: relative;
 }
 
 .fields {
@@ -50,9 +48,7 @@
 }
 
 .control {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  position: relative;
 }
 
 .label {
@@ -92,7 +88,18 @@
   color: var(--color-error);
 }
 
+/* Errors sit in the gap below the field, so the layout never shifts */
 .error {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--color-error);
+}
+
+.notice {
   font-size: 12px;
   line-height: 1.5;
   color: var(--color-error);
@@ -167,10 +174,6 @@
 @media screen and (min-width: 768px) {
   .form {
     gap: 80px;
-  }
-
-  .photo {
-    gap: 8px;
   }
 
   .fields {

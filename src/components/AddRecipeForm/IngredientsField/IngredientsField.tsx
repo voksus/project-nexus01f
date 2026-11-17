@@ -1,19 +1,33 @@
 import clsx from "clsx";
-import { type KeyboardEvent, useMemo, useState } from "react";
+import { type KeyboardEvent, useMemo, useRef, useState } from "react";
 import type { Ingredient } from "../../../types/api.ts";
 import { Icon } from "../../ui/Icon/Icon.tsx";
 import { Select } from "../../ui/Select/Select.tsx";
 import type { RecipeIngredientValue } from "../recipeForm.ts";
 import styles from "./IngredientsField.module.css";
 
+interface DraftError {
+  field: "ingredient" | "measure";
+  message: string;
+}
+
+const INGREDIENT_REQUIRED: DraftError = {
+  field: "ingredient",
+  message: "Select an ingredient",
+};
+const MEASURE_REQUIRED: DraftError = {
+  field: "measure",
+  message: "Enter the quantity",
+};
+
 interface IngredientsFieldProps {
   id: string;
   value: RecipeIngredientValue[];
   onChange: (ingredients: RecipeIngredientValue[]) => void;
-  onBlur?: () => void;
   ingredients: Ingredient[];
   ingredientsById: Map<string, Ingredient>;
   disabled?: boolean;
+  /** Form-level error after Publish: marks an empty select, the text is shown under the block */
   invalid?: boolean;
   describedBy?: string;
 }
@@ -22,7 +36,6 @@ export const IngredientsField = ({
   id,
   value,
   onChange,
-  onBlur,
   ingredients,
   ingredientsById,
   disabled = false,
@@ -32,7 +45,8 @@ export const IngredientsField = ({
   // Draft stays outside Formik until added
   const [ingredientId, setIngredientId] = useState("");
   const [measure, setMeasure] = useState("");
-  const [draftError, setDraftError] = useState<string | null>(null);
+  const [draftError, setDraftError] = useState<DraftError | null>(null);
+  const measureRef = useRef<HTMLInputElement>(null);
 
   // Added ingredients are hidden from the options
   const options = useMemo(() => {
@@ -45,15 +59,20 @@ export const IngredientsField = ({
   const add = () => {
     const trimmed = measure.trim();
     if (!ingredientId) {
-      setDraftError("Select an ingredient");
-      return;
-    }
-    if (!trimmed) {
-      setDraftError("Enter the quantity");
+      setDraftError(INGREDIENT_REQUIRED);
+      document.getElementById(id)?.focus();
       return;
     }
     if (value.some((item) => item.id === ingredientId)) {
-      setDraftError("This ingredient is already added");
+      setDraftError({
+        field: "ingredient",
+        message: "This ingredient is already added",
+      });
+      return;
+    }
+    if (!trimmed) {
+      setDraftError(MEASURE_REQUIRED);
+      measureRef.current?.focus();
       return;
     }
     onChange([...value, { id: ingredientId, measure: trimmed }]);
@@ -64,8 +83,21 @@ export const IngredientsField = ({
 
   const remove = (removedId: string) => {
     onChange(value.filter((item) => item.id !== removedId));
-    onBlur?.();
   };
+
+  // Empty select is flagged while nothing is added yet or a quantity waits for it
+  const handleSelectBlur = () => {
+    if (!ingredientId && (measure.trim() || value.length === 0)) {
+      setDraftError(INGREDIENT_REQUIRED);
+    }
+  };
+
+  const handleMeasureBlur = () => {
+    if (ingredientId && !measure.trim()) setDraftError(MEASURE_REQUIRED);
+  };
+
+  const clearErrorOf = (field: DraftError["field"]) =>
+    setDraftError((error) => (error?.field === field ? null : error));
 
   const handleMeasureKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key !== "Enter") return;
@@ -74,56 +106,73 @@ export const IngredientsField = ({
     add();
   };
 
-  const draftErrorId = `${id}-draft-error`;
-  const describedByIds =
-    clsx(describedBy, draftError && draftErrorId) || undefined;
+  const ingredientErrorId = `${id}-ingredient-error`;
+  const measureErrorId = `${id}-measure-error`;
+  const ingredientError =
+    draftError?.field === "ingredient" ? draftError.message : null;
+  const measureError =
+    draftError?.field === "measure" ? draftError.message : null;
 
   return (
     <div className={styles.root}>
-      <div className={styles.draftBlock}>
-        <div className={styles.draft}>
+      <div className={styles.draft}>
+        <div className={styles.slot}>
           <Select
             id={id}
-            className={styles.select}
             options={options}
             value={ingredientId}
             onChange={(next) => {
               setIngredientId(next);
-              setDraftError(null);
+              clearErrorOf("ingredient");
             }}
-            onBlur={onBlur}
+            onBlur={handleSelectBlur}
             placeholder={
               disabled ? "Loading ingredients…" : "Add the ingredient"
             }
             searchable
             disabled={disabled}
-            invalid={invalid || draftError === "Select an ingredient"}
-            aria-describedby={describedByIds}
+            invalid={Boolean(ingredientError) || (invalid && !ingredientId)}
+            aria-describedby={
+              clsx(
+                ingredientError && ingredientErrorId,
+                invalid && describedBy,
+              ) || undefined
+            }
           />
+          {ingredientError && (
+            <p id={ingredientErrorId} className={styles.error} role="alert">
+              {ingredientError}
+            </p>
+          )}
+        </div>
+
+        <div className={styles.slot}>
           <input
+            ref={measureRef}
             type="text"
             className={clsx(
               styles.measure,
-              draftError === "Enter the quantity" && styles.measureInvalid,
+              measureError && styles.measureInvalid,
             )}
             placeholder="Enter quantity"
             aria-label="Quantity"
-            aria-describedby={draftError ? draftErrorId : undefined}
+            aria-invalid={Boolean(measureError) || undefined}
+            aria-describedby={measureError ? measureErrorId : undefined}
             maxLength={50}
             value={measure}
             onChange={(event) => {
               setMeasure(event.target.value);
-              setDraftError(null);
+              clearErrorOf("measure");
             }}
+            onBlur={handleMeasureBlur}
             onKeyDown={handleMeasureKeyDown}
           />
+          {measureError && (
+            <p id={measureErrorId} className={styles.error} role="alert">
+              {measureError}
+            </p>
+          )}
         </div>
-
-        {draftError && (
-          <p id={draftErrorId} className={styles.error} role="alert">
-            {draftError}
-          </p>
-        )}
       </div>
 
       <button

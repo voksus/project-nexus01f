@@ -112,7 +112,10 @@ const UserPage = () => {
         profile: {
           ...page.profile,
           isFollowing: !following,
-          followersCount: page.profile.followersCount + (following ? -1 : 1),
+          followersCount: Math.max(
+            0,
+            page.profile.followersCount + (following ? -1 : 1),
+          ),
         },
       });
     } catch {
@@ -196,6 +199,15 @@ const UserPage = () => {
               kind={page.kind}
               userId={page.profile.id}
               currentUserId={currentUserId}
+              ownerFollowing={
+                page.kind === "other"
+                  ? page.profile.isFollowing === true
+                  : undefined
+              }
+              ownerPending={pending}
+              onOwnerFollowToggle={() => {
+                void handleFollowToggle();
+              }}
               onRecipeRemoved={(removedTab) => {
                 setPage((current) => {
                   if (current.status !== "ready" || current.kind !== "own") {

@@ -9,6 +9,7 @@ const RECIPE_PLACEHOLDER = "/images/placeholders/recipe.svg";
 interface UserCardProps {
   user: UserCardItem;
   showFollow: boolean;
+  following?: boolean;
   pending: boolean;
   onToggleFollow: (id: string, following: boolean) => void;
 }
@@ -16,10 +17,11 @@ interface UserCardProps {
 export const UserCard = ({
   user,
   showFollow,
+  following,
   pending,
   onToggleFollow,
 }: UserCardProps) => {
-  const following = user.isFollowing === true;
+  const isFollowing = following ?? user.isFollowing === true;
   const recipes = user.recipes.slice(0, 4);
 
   return (
@@ -40,9 +42,9 @@ export const UserCard = ({
               type="button"
               className={styles.follow}
               disabled={pending}
-              onClick={() => onToggleFollow(user.id, following)}
+              onClick={() => onToggleFollow(user.id, isFollowing)}
             >
-              {following ? "Unfollow" : "Follow"}
+              {isFollowing ? "Unfollow" : "Follow"}
             </button>
           ) : null}
         </div>

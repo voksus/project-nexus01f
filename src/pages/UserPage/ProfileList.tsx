@@ -33,6 +33,9 @@ interface ProfileListProps {
   kind: ProfileKind;
   userId: string;
   currentUserId: string;
+  ownerFollowing?: boolean;
+  ownerPending?: boolean;
+  onOwnerFollowToggle?: () => void;
   onRecipeRemoved?: (tab: "recipes" | "favorites") => void;
   onFollowingRemoved?: () => void;
   onSubscriptionChanged?: (delta: 1 | -1) => void;
@@ -67,6 +70,9 @@ export const ProfileList = ({
   kind,
   userId,
   currentUserId,
+  ownerFollowing = false,
+  ownerPending = false,
+  onOwnerFollowToggle,
   onRecipeRemoved,
   onFollowingRemoved,
   onSubscriptionChanged,
@@ -373,18 +379,37 @@ export const ProfileList = ({
         list.mode === "people" &&
         list.items.length > 0 ? (
           <ul className={styles.people}>
-            {list.items.map((person) => (
-              <li key={person.id} className={styles.person}>
-                <UserCard
-                  user={person}
-                  showFollow={person.id !== currentUserId}
-                  pending={pendingFollow === person.id}
-                  onToggleFollow={(id, following) => {
-                    void toggleFollow(id, following);
-                  }}
-                />
-              </li>
-            ))}
+            {list.items.map((person) => {
+              const selfInForeignFollowers =
+                kind === "other" &&
+                tab === "followers" &&
+                person.id === currentUserId;
+              return (
+                <li key={person.id} className={styles.person}>
+                  <UserCard
+                    user={person}
+                    showFollow={
+                      selfInForeignFollowers || person.id !== currentUserId
+                    }
+                    following={
+                      selfInForeignFollowers ? ownerFollowing : undefined
+                    }
+                    pending={
+                      selfInForeignFollowers
+                        ? ownerPending
+                        : pendingFollow === person.id
+                    }
+                    onToggleFollow={(id, following) => {
+                      if (selfInForeignFollowers) {
+                        onOwnerFollowToggle?.();
+                        return;
+                      }
+                      void toggleFollow(id, following);
+                    }}
+                  />
+                </li>
+              );
+            })}
           </ul>
         ) : null}
         {list.status === "ready" ? (

@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import avatarPlaceholder from "../../../assets/images/placeholders/avatar.svg";
 import type { UserShort } from "../../../types/api.ts";
 import { Icon } from "../../ui/Icon/Icon.tsx";
 import styles from "./UserBar.module.css";
@@ -61,7 +60,7 @@ export const UserBar = ({ user, onLogout }: UserBarProps) => {
       >
         <img
           className={styles.avatar}
-          src={user.avatar ?? avatarPlaceholder}
+          src={user.avatar ?? "/images/placeholders/avatar.svg"}
           alt=""
         />
         <span className={styles.name}>{user.name}</span>

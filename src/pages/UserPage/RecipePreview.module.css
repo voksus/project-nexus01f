@@ -1,0 +1,160 @@
+.card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.thumbLink {
+  flex: 0 0 auto;
+  width: 75px;
+  height: 75px;
+  overflow: hidden;
+  border-radius: 15px;
+  background: var(--color-gray);
+}
+
+.thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--transition-fast);
+}
+
+.main {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.copy {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  color: var(--color-main);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.titleLink {
+  display: block;
+  overflow: hidden;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: opacity var(--transition-fast);
+}
+
+.thumbLink:hover .thumb,
+.thumbLink:focus-visible .thumb,
+.titleLink:hover,
+.titleLink:focus-visible {
+  opacity: 0.65;
+}
+
+.thumbLink:focus-visible,
+.titleLink:focus-visible {
+  outline: 2px solid var(--color-main);
+  outline-offset: 2px;
+}
+
+.description {
+  display: -webkit-box;
+  margin: 8px 0 0;
+  overflow: hidden;
+  color: var(--color-gray);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-gray);
+  border-radius: 50%;
+  color: var(--color-main);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.iconButton:hover,
+.iconButton:focus-visible {
+  border-color: var(--color-main);
+  background: var(--color-main);
+  color: var(--color-white);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid var(--color-main);
+  outline-offset: 2px;
+}
+
+.iconButton:disabled {
+  opacity: 0.6;
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    gap: 16px;
+  }
+
+  .thumbLink {
+    width: 100px;
+    height: 100px;
+  }
+
+  .main {
+    gap: 32px;
+  }
+
+  .description {
+    margin-top: 10px;
+    color: var(--color-dark);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-line-clamp: 2;
+  }
+
+  .iconButton {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb,
+  .titleLink,
+  .iconButton {
+    transition: none;
+  }
+}

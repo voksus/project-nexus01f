@@ -17,6 +17,7 @@ import {
   updateAvatar,
 } from "../../services/profileApi.ts";
 import type { CurrentUserProfile, PublicUserProfile } from "../../types/api.ts";
+import { ProfileList } from "./ProfileList.tsx";
 import { TemporaryLogOutDialog } from "./TemporaryLogOutDialog.tsx";
 import { UserInfo } from "./UserInfo.tsx";
 import styles from "./UserPage.module.css";
@@ -161,7 +162,7 @@ const UserPage = () => {
         </div>
       ) : null}
 
-      {page.status === "ready" ? (
+      {page.status === "ready" && currentUserId ? (
         <div className={styles.body}>
           <UserInfo
             name={page.profile.name}
@@ -190,7 +191,71 @@ const UserPage = () => {
             }}
             onLogout={() => setLogoutOpen(true)}
           />
-          <div className={styles.content} />
+          <div className={styles.content}>
+            <ProfileList
+              kind={page.kind}
+              userId={page.profile.id}
+              currentUserId={currentUserId}
+              onRecipeRemoved={(removedTab) => {
+                setPage((current) => {
+                  if (current.status !== "ready" || current.kind !== "own") {
+                    return current;
+                  }
+                  const profile = current.profile;
+                  if (removedTab === "recipes") {
+                    return {
+                      ...current,
+                      profile: {
+                        ...profile,
+                        recipesCount: Math.max(0, profile.recipesCount - 1),
+                      },
+                    };
+                  }
+                  return {
+                    ...current,
+                    profile: {
+                      ...profile,
+                      favoritesCount: Math.max(0, profile.favoritesCount - 1),
+                    },
+                  };
+                });
+              }}
+              onFollowingRemoved={() => {
+                setPage((current) => {
+                  if (current.status !== "ready" || current.kind !== "own") {
+                    return current;
+                  }
+                  return {
+                    ...current,
+                    profile: {
+                      ...current.profile,
+                      followingCount: Math.max(
+                        0,
+                        current.profile.followingCount - 1,
+                      ),
+                    },
+                  };
+                });
+              }}
+              onSubscriptionChanged={(delta) => {
+                setPage((current) => {
+                  if (current.status !== "ready" || current.kind !== "own") {
+                    return current;
+                  }
+                  return {
+                    ...current,
+                    profile: {
+                      ...current.profile,
+                      followingCount: Math.max(
+                        0,
+                        current.profile.followingCount + delta,
+                      ),
+                    },
+                  };
+                });
+              }}
+            />
+          </div>
         </div>
       ) : null}
 

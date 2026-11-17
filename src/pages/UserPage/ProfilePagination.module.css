@@ -1,0 +1,71 @@
+.pager,
+.recipePager,
+.peoplePager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pager {
+  margin-top: 40px;
+}
+
+.recipePager {
+  margin-top: 30px;
+}
+
+.peoplePager {
+  margin-top: 32px;
+}
+
+.page,
+.current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-main);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.current {
+  border: 1px solid var(--color-main);
+  border-radius: 50%;
+}
+
+.page:hover,
+.page:focus-visible {
+  border-radius: 50%;
+  background: var(--border-light);
+}
+
+.page:focus-visible {
+  outline: 2px solid var(--color-main);
+  outline-offset: 2px;
+}
+
+.gap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 40px;
+  color: var(--color-gray);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 768px) {
+  .recipePager {
+    margin-top: 60px;
+  }
+
+  .peoplePager {
+    margin-top: 40px;
+  }
+}

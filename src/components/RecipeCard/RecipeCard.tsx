@@ -60,54 +60,56 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
           onError={withFallback(RECIPE_PLACEHOLDER)}
         />
       </div>
-      <div className={styles.content}>
-        <h3 className={styles.title} title={title}>
-          {title}
-        </h3>
-        {description && <p className={styles.description}>{description}</p>}
-      </div>
-      <div className={styles.footer}>
-        {isAuthenticated ? (
-          <Link
-            to={`/user/${owner.id}`}
-            className={styles.owner}
-            aria-label={`Open ${owner.name}'s profile`}
-          >
-            {ownerContent}
-          </Link>
-        ) : (
-          <button
-            type="button"
-            className={styles.owner}
-            aria-label={`Open ${owner.name}'s profile`}
-            onClick={openSignIn}
-          >
-            {ownerContent}
-          </button>
-        )}
-        <div className={styles.actions}>
-          <button
-            type="button"
-            className={clsx(
-              styles.iconButton,
-              isFavorite && styles.iconButtonActive,
-            )}
-            aria-label={
-              isFavorite ? "Remove from favorites" : "Add to favorites"
-            }
-            aria-pressed={isFavorite}
-            disabled={isPending}
-            onClick={handleFavoriteClick}
-          >
-            <Icon name="heart" className={styles.icon} />
-          </button>
-          <Link
-            to={`/recipe/${id}`}
-            className={styles.iconButton}
-            aria-label={`Open recipe ${title}`}
-          >
-            <Icon name="arrow-up-right" className={styles.icon} />
-          </Link>
+      <div className={styles.body}>
+        <div className={styles.content}>
+          <h3 className={styles.title} title={title}>
+            {title}
+          </h3>
+          <p className={styles.description}>{description}</p>
+        </div>
+        <div className={styles.footer}>
+          {isAuthenticated ? (
+            <Link
+              to={`/user/${owner.id}`}
+              className={styles.owner}
+              aria-label={`Open ${owner.name}'s profile`}
+            >
+              {ownerContent}
+            </Link>
+          ) : (
+            <button
+              type="button"
+              className={styles.owner}
+              aria-label={`Open ${owner.name}'s profile`}
+              onClick={openSignIn}
+            >
+              {ownerContent}
+            </button>
+          )}
+          <div className={styles.actions}>
+            <button
+              type="button"
+              className={clsx(
+                styles.iconButton,
+                isFavorite && styles.iconButtonActive,
+              )}
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
+              aria-pressed={isFavorite}
+              disabled={isPending}
+              onClick={handleFavoriteClick}
+            >
+              <Icon name="heart" className={styles.icon} />
+            </button>
+            <Link
+              to={`/recipe/${id}`}
+              className={styles.iconButton}
+              aria-label={`Open recipe ${title}`}
+            >
+              <Icon name="arrow-up-right" className={styles.icon} />
+            </Link>
+          </div>
         </div>
       </div>
     </article>

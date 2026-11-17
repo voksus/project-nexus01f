@@ -18,6 +18,12 @@
   object-fit: cover;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -38,7 +44,7 @@
 
 .description {
   display: -webkit-box;
-  min-height: 40px;
+  min-height: 44px;
   overflow: hidden;
   font-size: 14px;
   font-weight: 500;
@@ -55,7 +61,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  margin-top: auto;
 }
 
 .owner {
@@ -99,7 +104,7 @@
 
 .iconButton {
   display: flex;
-  padding: 10px;
+  padding: 9px;
   border: 1px solid var(--color-gray);
   border-radius: 50%;
   color: var(--color-main);
@@ -137,7 +142,7 @@
   }
 
   .description {
-    min-height: 48px;
+    min-height: 54px;
     font-size: 16px;
     line-height: 24px;
   }
@@ -153,7 +158,7 @@
   }
 
   .iconButton {
-    padding: 12px;
+    padding: 11px;
   }
 
   .icon {

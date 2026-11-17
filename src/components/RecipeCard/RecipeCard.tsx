@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import type { SyntheticEvent } from "react";
 import { Link } from "react-router-dom";
-import avatarPlaceholder from "../../assets/images/placeholders/avatar.svg";
-import recipePlaceholder from "../../assets/images/placeholders/recipe.svg";
 import { useAuthGate } from "../../hooks/useAuthGate.ts";
 import { useFavorite } from "../../hooks/useFavorite.ts";
 import type { RecipeCardItem } from "../../types/api.ts";
 import { Icon } from "../ui/Icon/Icon.tsx";
 import styles from "./RecipeCard.module.css";
+
+const AVATAR_PLACEHOLDER = "/images/placeholders/avatar.svg";
+const RECIPE_PLACEHOLDER = "/images/placeholders/recipe.svg";
 
 interface RecipeCardProps {
   recipe: RecipeCardItem;
@@ -39,10 +40,10 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
     <>
       <img
         className={styles.avatar}
-        src={owner.avatar || avatarPlaceholder}
+        src={owner.avatar || AVATAR_PLACEHOLDER}
         alt=""
         loading="lazy"
-        onError={withFallback(avatarPlaceholder)}
+        onError={withFallback(AVATAR_PLACEHOLDER)}
       />
       <span className={styles.ownerName}>{owner.name}</span>
     </>
@@ -53,10 +54,10 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
       <div className={styles.imageWrapper}>
         <img
           className={styles.image}
-          src={thumb || recipePlaceholder}
+          src={thumb || RECIPE_PLACEHOLDER}
           alt={title}
           loading="lazy"
-          onError={withFallback(recipePlaceholder)}
+          onError={withFallback(RECIPE_PLACEHOLDER)}
         />
       </div>
       <div className={styles.content}>

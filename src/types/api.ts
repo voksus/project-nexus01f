@@ -6,6 +6,15 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
+export interface PaginationQuery {
+  page?: number;
+  limit?: number;
+}
+
+export interface MessageResponse {
+  message: string;
+}
+
 export interface Category {
   id: string;
   name: string;

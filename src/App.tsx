@@ -11,6 +11,7 @@ const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
 );
+const UserPage = lazy(() => import("./pages/UserPage/UserPage.tsx"));
 
 const PagePlaceholder = ({ title }: { title: string }) => (
   <main className="container" style={{ padding: "48px 16px" }}>
@@ -58,7 +59,7 @@ export const App = () => {
             path="/user/:id"
             element={
               <PrivateRoute>
-                <PagePlaceholder title="User Profile Page" />
+                <UserPage />
               </PrivateRoute>
             }
           />

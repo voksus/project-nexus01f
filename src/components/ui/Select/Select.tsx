@@ -223,38 +223,38 @@ export const Select = ({
       </div>
 
       {isOpen && (
+        // Keep focus on the control when clicking options or the scrollbar
+        // biome-ignore lint/a11y/noStaticElementInteractions: only prevents focus loss
         <div
-          ref={listRef}
-          id={listId}
-          role="listbox"
-          className={styles.list}
-          // Keep focus on the control when clicking options or the scrollbar
+          className={styles.popup}
           onMouseDown={(event) => event.preventDefault()}
         >
-          {visibleOptions.length === 0 ? (
-            <div className={styles.empty}>{emptyMessage}</div>
-          ) : (
-            visibleOptions.map((option, index) => (
-              // biome-ignore lint/a11y/useKeyWithClickEvents: keyboard is handled on the combobox
-              <div
-                key={option.value}
-                id={`${controlId}-option-${index}`}
-                data-index={index}
-                role="option"
-                tabIndex={-1}
-                aria-selected={option.value === value}
-                className={clsx(
-                  styles.option,
-                  index === activeIndex && styles.active,
-                  option.value === value && styles.selected,
-                )}
-                onMouseEnter={() => setActiveIndex(index)}
-                onClick={() => choose(option)}
-              >
-                {option.label}
-              </div>
-            ))
-          )}
+          <div ref={listRef} id={listId} role="listbox" className={styles.list}>
+            {visibleOptions.length === 0 ? (
+              <div className={styles.empty}>{emptyMessage}</div>
+            ) : (
+              visibleOptions.map((option, index) => (
+                // biome-ignore lint/a11y/useKeyWithClickEvents: keyboard is handled on the combobox
+                <div
+                  key={option.value}
+                  id={`${controlId}-option-${index}`}
+                  data-index={index}
+                  role="option"
+                  tabIndex={-1}
+                  aria-selected={option.value === value}
+                  className={clsx(
+                    styles.option,
+                    index === activeIndex && styles.active,
+                    option.value === value && styles.selected,
+                  )}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onClick={() => choose(option)}
+                >
+                  {option.label}
+                </div>
+              ))
+            )}
+          </div>
         </div>
       )}
     </div>

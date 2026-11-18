@@ -1,10 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { fetchFilterOptions } from "../../../redux/filters/operations.ts";
-import {
-  selectAreas,
-  selectIngredients,
-} from "../../../redux/filters/selectors.ts";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks.ts";
+import { useMemo } from "react";
+import { useReferences } from "../../../hooks/useReferences.ts";
 import { Select, type SelectOption } from "../../ui/Select/Select.tsx";
 import styles from "./RecipeFilters.module.css";
 
@@ -29,13 +24,8 @@ export const RecipeFilters = ({
   onIngredientChange,
   onAreaChange,
 }: RecipeFiltersProps) => {
-  const dispatch = useAppDispatch();
-  const ingredients = useAppSelector(selectIngredients);
-  const areas = useAppSelector(selectAreas);
-
-  useEffect(() => {
-    dispatch(fetchFilterOptions());
-  }, [dispatch]);
+  const { items: ingredients } = useReferences("ingredients");
+  const { items: areas } = useReferences("areas");
 
   const ingredientOptions = useMemo(
     () => toOptions(ingredients, "All ingredients"),

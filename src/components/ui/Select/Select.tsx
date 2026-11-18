@@ -58,7 +58,9 @@ export const Select = ({
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
 
-  const selected = options.find((option) => option.value === value);
+  const selected = value
+    ? options.find((option) => option.value === value)
+    : undefined;
 
   const visibleOptions = useMemo(() => {
     const needle = query.trim().toLowerCase();

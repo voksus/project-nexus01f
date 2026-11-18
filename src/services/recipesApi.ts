@@ -1,7 +1,5 @@
 import type {
-  Area,
   CreatedRecipe,
-  Ingredient,
   PaginatedResponse,
   RecipeCardItem,
   RecipesQuery,
@@ -36,16 +34,6 @@ export const getRecipes = async (query: RecipesQuery, signal?: AbortSignal) => {
     "/recipes",
     { params: query, signal },
   );
-  return data;
-};
-
-export const getIngredients = async () => {
-  const { data } = await api.get<Ingredient[]>("/ingredients");
-  return data;
-};
-
-export const getAreas = async () => {
-  const { data } = await api.get<Area[]>("/areas");
   return data;
 };
 

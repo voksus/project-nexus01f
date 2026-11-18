@@ -67,6 +67,11 @@ export interface RecipeIngredientDetail {
   measure: string | null;
 }
 
+/** POST /api/recipes response; only the id is needed */
+export interface CreatedRecipe {
+  id: string;
+}
+
 export interface RecipeDetail extends RecipeCardItem {
   instructions: string;
   category: Category;

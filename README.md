@@ -56,7 +56,19 @@ On startup with the marker, neither current-user lookup nor refresh runs. Online
 
 Storage events clear other tabs. A delayed event whose marker was already removed checks the current cookie session without refresh; it does not replace a newer valid account or restore user state. This handles background tabs that receive events after server cleanup has finished.
 
-Add future profile/favorites reducers to appReducer in src/redux/rootReducer.ts. The root reset passes undefined state to all reducers, clearing their caches together. Those modules should use the shared Axios instance so stale responses are rejected too.
+Add future profile/favorites reducers to appReducer in src/redux/rootReducer.ts. The root reset passes undefined state to all account reducers, clearing their caches together. Those modules should use the shared Axios instance so stale responses are rejected too. The only exception is the public references slice described below.
+
+## References (categories, areas, ingredients)
+
+Public lists live in the references slice (src/redux/references/). They are loaded once per app session and cached in the store:
+
+```tsx
+const { items, status, error, retry } = useReferences("categories"); // "areas" | "ingredients"
+```
+
+The hook dispatches the fetch on mount. Thunks skip the request while one is in flight or after success and allow it again after a failure, so several components can call the hook without duplicate requests. Use selectIngredientsById for O(1) lookups by id.
+
+These endpoints are public and do not depend on the account, so they use the separate publicApi instance without session interceptors. A logout neither rejects their in-flight requests nor triggers refresh. The root reset also keeps this slice, so public pages keep their filters after logout.
 
 ## Verification
 

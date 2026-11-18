@@ -1,10 +1,12 @@
 import { combineReducers, type UnknownAction } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/authSlice.ts";
+import { recipesReducer } from "./recipes/recipesSlice.ts";
 import { referencesReducer } from "./references/referencesSlice.ts";
 import { sessionCleared } from "./sessionActions.ts";
 
 const appReducer = combineReducers({
   auth: authReducer,
+  recipes: recipesReducer,
   references: referencesReducer,
 });
 

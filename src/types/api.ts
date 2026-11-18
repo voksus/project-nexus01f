@@ -99,3 +99,11 @@ export interface Testimonial {
   testimonial: string;
   owner: UserShort;
 }
+
+export interface RecipesQuery {
+  category?: string;
+  ingredient?: string;
+  area?: string;
+  page: number;
+  limit: number;
+}

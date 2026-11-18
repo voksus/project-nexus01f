@@ -1,4 +1,9 @@
-import type { CreatedRecipe } from "../types/api.ts";
+import type {
+  CreatedRecipe,
+  PaginatedResponse,
+  RecipeCardItem,
+  RecipesQuery,
+} from "../types/api.ts";
 import { api } from "./api.ts";
 
 // 5 MB uploads and Render cold starts exceed the default 10 s
@@ -22,4 +27,20 @@ export const createRecipe = async (
   }
 
   return { id: data.id };
+};
+
+export const getRecipes = async (query: RecipesQuery, signal?: AbortSignal) => {
+  const { data } = await api.get<PaginatedResponse<RecipeCardItem>>(
+    "/recipes",
+    { params: query, signal },
+  );
+  return data;
+};
+
+export const addRecipeToFavorites = async (recipeId: string) => {
+  await api.post(`/recipes/${encodeURIComponent(recipeId)}/favorite`);
+};
+
+export const removeRecipeFromFavorites = async (recipeId: string) => {
+  await api.delete(`/recipes/${encodeURIComponent(recipeId)}/favorite`);
 };

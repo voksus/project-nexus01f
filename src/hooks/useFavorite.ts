@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
@@ -29,7 +30,10 @@ export const useFavorite = (recipeId: string, initialValue: boolean) => {
       }
     } catch (error) {
       setIsFavorite(!next);
-      toast.error(getErrorMessage(error, "Unable to update favorites."));
+      // The rate limit toast is shown globally by the API client
+      if (!(axios.isAxiosError(error) && error.response?.status === 429)) {
+        toast.error(getErrorMessage(error, "Unable to update favorites."));
+      }
     } finally {
       setIsPending(false);
     }

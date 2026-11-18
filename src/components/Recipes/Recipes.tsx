@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery.ts";
+import { selectUser } from "../../redux/auth/selectors.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 import { fetchRecipes } from "../../redux/recipes/operations.ts";
 import { resetRecipes } from "../../redux/recipes/recipesSlice.ts";
@@ -34,6 +35,7 @@ export const Recipes = ({ category, onBack }: RecipesProps) => {
   const totalPages = useAppSelector(selectRecipesTotalPages);
   const isLoading = useAppSelector(selectRecipesIsLoading);
   const error = useAppSelector(selectRecipesError);
+  const userId = useAppSelector(selectUser)?.id;
 
   const sectionRef = useRef<HTMLElement>(null);
   const hasScrolledRef = useRef(false);
@@ -69,10 +71,12 @@ export const Recipes = ({ category, onBack }: RecipesProps) => {
     [dispatch, category, ingredient, area, page, limit],
   );
 
+  // userId is not read here, but the session reset clears the list and isFavorite is per user
+  // biome-ignore lint/correctness/useExhaustiveDependencies: refetch on sign-in and sign-out
   useEffect(() => {
     const request = loadRecipes();
     return () => request.abort();
-  }, [loadRecipes]);
+  }, [loadRecipes, userId]);
 
   useEffect(() => {
     return () => {

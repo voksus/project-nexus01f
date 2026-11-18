@@ -95,6 +95,22 @@ describe("recipeSchema", () => {
     expect(errors).toHaveProperty("instructions");
   });
 
+  it("matches the backend title length (3–100 after trim)", async () => {
+    expect(await errorsOf({ ...validValues, title: "ab" })).toHaveProperty(
+      "title",
+    );
+    expect(await errorsOf({ ...validValues, title: "  ab  " })).toHaveProperty(
+      "title",
+    );
+    expect(
+      await errorsOf({ ...validValues, title: "a".repeat(101) }),
+    ).toHaveProperty("title");
+    expect(await errorsOf({ ...validValues, title: "abc" })).toEqual({});
+    expect(await errorsOf({ ...validValues, title: "a".repeat(100) })).toEqual(
+      {},
+    );
+  });
+
   it("limits text lengths", async () => {
     const errors = await errorsOf({
       ...validValues,

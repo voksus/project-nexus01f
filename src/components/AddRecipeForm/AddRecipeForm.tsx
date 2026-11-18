@@ -22,6 +22,7 @@ import {
   parseSubmitError,
   type RecipeFormValues,
   recipeSchema,
+  TITLE_MAX,
   toRecipeFormData,
 } from "./recipeForm.ts";
 
@@ -98,6 +99,8 @@ export const AddRecipeForm = () => {
       navigate(`/recipe/${recipe.id}`);
     } catch (error) {
       if (axios.isCancel(error)) return;
+      // 429: the api interceptor already shows the rate-limit toast
+      if (axios.isAxiosError(error) && error.response?.status === 429) return;
       const { message, fieldErrors } = parseSubmitError(error);
       setErrors(fieldErrors);
       toast.error(message);
@@ -195,6 +198,7 @@ export const AddRecipeForm = () => {
                   errorOf("title") && styles.titleInvalid,
                 )}
                 placeholder="The name of the recipe"
+                maxLength={TITLE_MAX}
                 aria-label="Recipe name"
                 aria-invalid={Boolean(errorOf("title")) || undefined}
                 aria-describedby={describedBy("title")}

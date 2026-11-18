@@ -1,6 +1,8 @@
 import axios from "axios";
 import { array, mixed, number, type ObjectSchema, object, string } from "yup";
 
+export const TITLE_MIN = 3;
+export const TITLE_MAX = 100;
 export const DESCRIPTION_MAX = 200;
 export const INSTRUCTIONS_MAX = 1000;
 
@@ -57,7 +59,11 @@ export const recipeSchema: ObjectSchema<RecipeFormValues> = object({
       "The photo must be 5 MB or smaller",
       (file) => !file || file.size <= THUMB_MAX_BYTES,
     ),
-  title: string().trim().required("Enter the recipe name"),
+  title: string()
+    .trim()
+    .required("Enter the recipe name")
+    .min(TITLE_MIN, `Use at least ${TITLE_MIN} characters`)
+    .max(TITLE_MAX, `Use at most ${TITLE_MAX} characters`),
   description: string()
     .trim()
     .required("Enter a short description")

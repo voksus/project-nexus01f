@@ -1,0 +1,200 @@
+.title {
+  margin-bottom: 32px;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fieldWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 13px 18px;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  color: var(--color-main);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.input::placeholder {
+  color: var(--text-muted);
+}
+
+.input:focus,
+.inputFilled {
+  border-color: var(--color-main);
+}
+
+.inputError {
+  border-color: var(--color-error);
+}
+
+.passwordInput {
+  padding-right: 48px;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--color-main);
+  transition: opacity var(--transition-fast);
+}
+
+.eyeButton:hover,
+.eyeButton:focus-visible {
+  opacity: 0.7;
+}
+
+.eyeIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.errorText {
+  margin-top: 4px;
+  padding-left: 18px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-error);
+}
+
+.submitButton {
+  width: 100%;
+  height: 48px;
+  margin-top: 32px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-gray);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.submitButtonReady {
+  background-color: var(--color-main);
+}
+
+.submitButtonReady:hover,
+.submitButtonReady:focus-visible {
+  background-color: var(--color-dark);
+}
+
+.submitButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.footerText {
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--color-gray);
+}
+
+.switchButton {
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: var(--color-main);
+  text-decoration: underline;
+  transition: opacity var(--transition-fast);
+}
+
+.switchButton:hover,
+.switchButton:focus-visible {
+  opacity: 0.7;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    margin-bottom: 40px;
+    font-size: 32px;
+    line-height: 1.25;
+  }
+
+  .input {
+    height: 56px;
+    padding: 15px 18px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .passwordInput {
+    padding-right: 52px;
+  }
+
+  .eyeIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .submitButton {
+    height: 56px;
+    margin-top: 40px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .footerText {
+    margin-top: 20px;
+    font-size: 14px;
+    line-height: 1.29;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .input,
+  .eyeButton,
+  .submitButton,
+  .switchButton {
+    transition: none;
+  }
+}

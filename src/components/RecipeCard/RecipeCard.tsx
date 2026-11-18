@@ -81,7 +81,7 @@ export const RecipeCard = ({ recipe }: RecipeCardProps) => {
               type="button"
               className={styles.owner}
               aria-label={`Open ${owner.name}'s profile`}
-              onClick={openSignIn}
+              onClick={() => openSignIn()}
             >
               {ownerContent}
             </button>

@@ -8,6 +8,7 @@ import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
+const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
@@ -48,7 +49,7 @@ export const App = () => {
             path="/recipe/add"
             element={
               <PrivateRoute>
-                <PagePlaceholder title="Add Recipe Page" />
+                <AddRecipePage />
               </PrivateRoute>
             }
           />

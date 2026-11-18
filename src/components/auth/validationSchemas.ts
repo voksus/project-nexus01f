@@ -2,18 +2,12 @@ import axios from "axios";
 import * as Yup from "yup";
 
 const emailField = Yup.string()
-  .trim()
-  .email("Invalid email address")
+  .email("Invalid email")
   .required("Email is required");
-
-const passwordField = Yup.string()
-  .min(6, "Password must be at least 6 characters")
-  .max(64, "Password must be at most 64 characters")
-  .required("Password is required");
 
 export const signInValidationSchema = Yup.object({
   email: emailField,
-  password: passwordField,
+  password: Yup.string().required("Password is required"),
 });
 
 export const signUpValidationSchema = Yup.object({
@@ -23,7 +17,10 @@ export const signUpValidationSchema = Yup.object({
     .max(50, "Name must be at most 50 characters")
     .required("Name is required"),
   email: emailField,
-  password: passwordField,
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .max(64, "Password must be at most 64 characters")
+    .required("Password is required"),
 });
 
 export const extractAuthErrorMessage = (

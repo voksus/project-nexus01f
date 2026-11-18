@@ -41,7 +41,9 @@ export const SignInForm = ({ onSuccess }: SignInFormProps) => {
       );
       onSuccess();
     } catch (error) {
-      if (!axios.isCancel(error)) {
+      const isRateLimited =
+        axios.isAxiosError(error) && error.response?.status === 429;
+      if (!axios.isCancel(error) && !isRateLimited) {
         toast.error(
           extractAuthErrorMessage(
             error,

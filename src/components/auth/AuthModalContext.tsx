@@ -96,7 +96,7 @@ export const AuthModalProvider = ({ children }: { children: ReactNode }) => {
     setActiveModal(null);
     setRedirectTo(null);
     if (target) {
-      navigate(target);
+      navigate(target, { replace: true });
     }
   }, [navigate, redirectTo]);
 

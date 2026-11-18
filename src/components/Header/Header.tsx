@@ -16,11 +16,6 @@ interface HeaderProps {
   theme: "dark" | "light";
 }
 
-// TODO [FE-04]: відкривати SignInModal / SignUpModal / LogOutModal
-// const openSignIn = () => undefined;
-// const openSignUp = () => undefined;
-// const openLogOut = () => undefined;
-
 export const Header = ({ theme }: HeaderProps) => {
   const user = useAppSelector(selectUser);
   const { activeModal, openSignIn, openSignUp, openLogOut } = useAuthModal();

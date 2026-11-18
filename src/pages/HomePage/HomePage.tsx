@@ -21,7 +21,7 @@ const HomePage = () => {
       navigate("/recipe/add");
       return;
     }
-    // TODO [FE-04]: відкривати SignInModal; після входу модалка поверне на /recipe/add через state.from
+
     openSignIn("/recipe/add");
   };
 

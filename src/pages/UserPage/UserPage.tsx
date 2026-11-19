@@ -17,6 +17,7 @@ import {
   updateAvatar,
 } from "../../services/profileApi.ts";
 import type { CurrentUserProfile, PublicUserProfile } from "../../types/api.ts";
+import { EditProfileModal } from "./EditProfileModal.tsx";
 import { ProfileList } from "./ProfileList.tsx";
 import { UserInfo } from "./UserInfo.tsx";
 import styles from "./UserPage.module.css";
@@ -41,6 +42,7 @@ const UserPage = () => {
   const [page, setPage] = useState<PageStatus>({ status: "loading" });
   const [reloadKey, setReloadKey] = useState(0);
   const [logoutOpen, setLogoutOpen] = useState(false);
+  const [nameEditorOpen, setNameEditorOpen] = useState(false);
   const [pending, setPending] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
 
@@ -192,6 +194,9 @@ const UserPage = () => {
               void handleFollowToggle();
             }}
             onLogout={() => setLogoutOpen(true)}
+            onEditName={
+              page.kind === "own" ? () => setNameEditorOpen(true) : undefined
+            }
           />
           <div className={styles.content}>
             <ProfileList
@@ -262,6 +267,19 @@ const UserPage = () => {
       ) : null}
 
       {logoutOpen ? <LogOutModal onClose={() => setLogoutOpen(false)} /> : null}
+      {nameEditorOpen && page.status === "ready" && page.kind === "own" ? (
+        <EditProfileModal
+          name={page.profile.name}
+          onClose={() => setNameEditorOpen(false)}
+          onUpdated={(name) => {
+            setPage((current) =>
+              current.status === "ready" && current.kind === "own"
+                ? { ...current, profile: { ...current.profile, name } }
+                : current,
+            );
+          }}
+        />
+      ) : null}
     </main>
   );
 };

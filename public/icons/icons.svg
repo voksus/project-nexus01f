@@ -48,6 +48,9 @@
 <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6 6 18M6 6l12 12"/>
 </symbol>
+<symbol id="edit" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 20h4l10.5-10.5a2.1 2.1 0 0 0-3-3L5 17v3zM13.5 6.5l3 3"/>
+</symbol>
 <symbol id="burger-menu" viewBox="0 0 28 28" fill="none" stroke="currentColor">
   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M24.5 11.667h-21M24.5 7h-21m21 9.334h-21M24.5 21h-21"/>
 </symbol>

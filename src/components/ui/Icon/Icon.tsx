@@ -14,6 +14,7 @@ export type IconName =
   | "plus"
   | "minus"
   | "close"
+  | "edit"
   | "burger-menu"
   | "upload-photo";
 

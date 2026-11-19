@@ -44,7 +44,7 @@
   letter-spacing: -0.02em;
   text-transform: uppercase;
   text-align: left;
-  color: var(--color-black);
+  color: var(--color-main);
 }
 
 .recipeDetailsMeta {
@@ -126,7 +126,7 @@
   line-height: 1.3333; /* 24px */
   letter-spacing: -0.02em;
   text-transform: uppercase;
-  color: var(--color-black);
+  color: var(--color-main);
 }
 
 /* Список інгредієнтів (2 колонки на мобільному, вирівнювання вліво) */
@@ -179,7 +179,7 @@
   font-weight: 500;
   line-height: 1.43; /* 20px */
   letter-spacing: -0.02em;
-  color: var(--color-black);
+  color: var(--color-main);
 }
 
 .ingredientsListMeasure {
@@ -279,7 +279,6 @@
 
   .ingredientsListItem {
     flex: 0 0 calc((100% - 40px) / 3);
-    width: 178px;
     gap: 14px;
   }
 

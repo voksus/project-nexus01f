@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PopularRecipes } from "../../components/PopularRecipes/PopularRecipes.tsx";
@@ -13,7 +12,7 @@ import {
 } from "../../redux/recipes/selectors.ts";
 import styles from "./RecipePage.module.css";
 
-export const RecipePage = () => {
+export default function RecipePage() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
 
@@ -21,7 +20,6 @@ export const RecipePage = () => {
   const isRecipeLoading = useAppSelector(selectRecipeDetailsIsLoading);
   const error = useAppSelector(selectRecipeDetailsError);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: refetch on sign-in and sign-out
   useEffect(() => {
     if (!id) return;
 
@@ -35,7 +33,7 @@ export const RecipePage = () => {
   }, [dispatch, id]);
 
   return (
-    <main className={clsx("container")}>
+    <main className="container">
       <div className={styles.recipePage}>
         {isRecipeLoading && <p>Loading recipe...</p>}
 
@@ -53,4 +51,4 @@ export const RecipePage = () => {
       </div>
     </main>
   );
-};
+}

@@ -6,7 +6,6 @@ interface RecipeDetailsState {
   item: RecipeDetails | null;
   isRecipeLoading: boolean;
   error: string | null;
-  isFavoriteLoading: boolean;
 }
 
 const initialState: RecipeDetailsState = {
@@ -14,7 +13,6 @@ const initialState: RecipeDetailsState = {
   // The page requests recipe details right after mounting, so there is no idle state
   isRecipeLoading: true,
   error: null,
-  isFavoriteLoading: false,
 };
 
 const recipeDetailsSlice = createSlice({

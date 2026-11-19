@@ -14,7 +14,7 @@
   letter-spacing: -0.02em;
   text-transform: uppercase;
   text-align: left;
-  color: var(--color-black);
+  color: var(--color-main);
 }
 
 /* Список карток (1 колонка на мобільному, Gap: 32px) */

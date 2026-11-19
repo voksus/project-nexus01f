@@ -61,17 +61,9 @@ export const getPopularRecipes = async (
   limit = 4,
   signal?: AbortSignal,
 ): Promise<RecipeCardItem[]> => {
-  const { data } = await api.get<
-    RecipeCardItem[] | { items?: RecipeCardItem[]; recipes?: RecipeCardItem[] }
-  >("/recipes/popular", {
+  const { data } = await api.get<RecipeCardItem[]>("/recipes/popular", {
     params: { limit },
     signal,
   });
-
-  if (Array.isArray(data)) {
-    return data.slice(0, limit);
-  }
-
-  const list = data.items ?? data.recipes ?? [];
-  return list.slice(0, limit);
+  return data;
 };

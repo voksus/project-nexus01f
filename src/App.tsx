@@ -7,13 +7,13 @@ import { SharedLayout } from "./components/SharedLayout/SharedLayout.tsx";
 import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
-import { RecipePage } from "./pages/RecipePage/RecipePage.tsx";
 
 const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
 );
+const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage.tsx"));
 
 const PagePlaceholder = ({ title }: { title: string }) => (
   <main className="container" style={{ padding: "48px 16px" }}>

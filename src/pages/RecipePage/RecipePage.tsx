@@ -45,7 +45,9 @@ export const RecipePage = () => {
           </div>
         )}
 
-        {!isRecipeLoading && !error && recipe && <RecipeContent recipe={recipe} />}
+        {!isRecipeLoading && !error && recipe && (
+          <RecipeContent recipe={recipe} />
+        )}
         <PopularRecipes />
       </div>
     </main>

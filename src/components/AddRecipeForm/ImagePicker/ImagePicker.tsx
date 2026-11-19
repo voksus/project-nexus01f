@@ -7,6 +7,7 @@ import styles from "./ImagePicker.module.css";
 interface ImagePickerProps {
   id: string;
   value: File | null;
+  existingUrl?: string | null;
   onChange: (file: File) => void;
   onBlur?: () => void;
   invalid?: boolean;
@@ -16,6 +17,7 @@ interface ImagePickerProps {
 export const ImagePicker = ({
   id,
   value,
+  existingUrl = null,
   onChange,
   onBlur,
   invalid = false,
@@ -52,10 +54,10 @@ export const ImagePicker = ({
         onBlur={onBlur}
       />
 
-      {previewUrl ? (
+      {previewUrl || existingUrl ? (
         <>
           <img
-            src={previewUrl}
+            src={previewUrl ?? existingUrl ?? undefined}
             alt="Selected dish"
             className={clsx(styles.frame, styles.preview)}
           />

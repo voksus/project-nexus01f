@@ -21,6 +21,7 @@ export const RecipePage = () => {
   const isRecipeLoading = useAppSelector(selectRecipeDetailsIsLoading);
   const error = useAppSelector(selectRecipeDetailsError);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: refetch on sign-in and sign-out
   useEffect(() => {
     if (!id) return;
 

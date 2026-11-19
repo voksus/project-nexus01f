@@ -91,6 +91,7 @@
 .recipeAuthorInfo {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .recipeAuthorLabel {
@@ -296,8 +297,8 @@
   }
 }
 
-/* ==================== ДЕСКТОП (від 1280px) ==================== */
-@media (min-width: 1280px) {
+/* ==================== ДЕСКТОП (від 1440px) ==================== */
+@media (min-width: 1440px) {
   .recipeDetails {
     flex-direction: row;
     gap: 80px;

@@ -102,6 +102,7 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
                   </Link>
                 ) : (
                   <button
+                    className={styles.recipeAuthorName}
                     type="button"
                     aria-label={`Open ${owner.name}'s profile`}
                     onClick={openSignIn}

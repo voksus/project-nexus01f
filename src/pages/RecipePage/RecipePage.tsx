@@ -18,7 +18,7 @@ export const RecipePage = () => {
   const dispatch = useAppDispatch();
 
   const recipe = useAppSelector(selectRecipeDetails);
-  const isLoading = useAppSelector(selectRecipeDetailsIsLoading);
+  const isRecipeLoading = useAppSelector(selectRecipeDetailsIsLoading);
   const error = useAppSelector(selectRecipeDetailsError);
 
   useEffect(() => {
@@ -36,16 +36,16 @@ export const RecipePage = () => {
   return (
     <main className={clsx("container")}>
       <div className={styles.recipePage}>
-        {isLoading && <p>Loading recipe...</p>}
+        {isRecipeLoading && <p>Loading recipe...</p>}
 
-        {!isLoading && error && (
+        {!isRecipeLoading && error && (
           <div>
             <p>{error}</p>
             <Link to="/">Back to Home</Link>
           </div>
         )}
 
-        {!isLoading && !error && recipe && <RecipeContent recipe={recipe} />}
+        {!isRecipeLoading && !error && recipe && <RecipeContent recipe={recipe} />}
         <PopularRecipes />
       </div>
     </main>

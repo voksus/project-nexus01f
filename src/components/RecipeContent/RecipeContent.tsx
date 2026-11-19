@@ -159,8 +159,7 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
             disabled={isPending}
             onClick={handleFavoriteClick}
           >
-            {/* {isFavorite ? "Remove from favorites" : "Add to favorites"} */}
-            Add to favorites
+            {isFavorite ? "Remove from favorites" : "Add to favorites"}
           </button>
         </div>
       </article>

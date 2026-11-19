@@ -2,7 +2,7 @@ import axios, { type AxiosInstance } from "axios";
 import toast from "react-hot-toast";
 
 const config = {
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000/api",
+  baseURL: import.meta.env.VITE_API_URL || "/api",
   withCredentials: true,
   timeout: 10000,
 };

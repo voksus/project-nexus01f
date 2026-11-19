@@ -24,7 +24,7 @@
   font-weight: 500;
   line-height: 1.43;
   letter-spacing: -0.02em;
-  color: #1a1a1a;
+  color: var(--color-dark);
 }
 
 .backLink {
@@ -32,10 +32,10 @@
   align-items: center;
   justify-content: center;
   padding: 14px 28px;
-  border: 1px solid #050505;
+  border: 1px solid var(--color-main);
   border-radius: 30px;
-  background-color: #050505;
-  color: #ffffff;
+  background-color: var(--color-main);
+  color: var(--color-white);
   font-size: 14px;
   font-weight: 700;
   line-height: 1.43;
@@ -50,8 +50,8 @@
 
 .backLink:hover,
 .backLink:focus-visible {
-  background-color: #1a1a1a;
-  border-color: #1a1a1a;
+  background-color: var(--color-dark);
+  border-color: var(--color-dark);
 }
 
 @media screen and (min-width: 768px) {

@@ -1,5 +1,7 @@
 import { combineReducers, type UnknownAction } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/authSlice.ts";
+import { popularRecipesReducer } from "./recipes/popularRecipesSlice.ts";
+import { recipeDetailsReducer } from "./recipes/recipeDetailsSlice.ts";
 import { recipesReducer } from "./recipes/recipesSlice.ts";
 import { referencesReducer } from "./references/referencesSlice.ts";
 import { sessionCleared } from "./sessionActions.ts";
@@ -7,6 +9,8 @@ import { sessionCleared } from "./sessionActions.ts";
 const appReducer = combineReducers({
   auth: authReducer,
   recipes: recipesReducer,
+  recipeDetails: recipeDetailsReducer,
+  popularRecipes: popularRecipesReducer,
   references: referencesReducer,
 });
 

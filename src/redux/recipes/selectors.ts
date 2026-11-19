@@ -6,3 +6,17 @@ export const selectRecipesTotalPages = (state: RootState) =>
 export const selectRecipesIsLoading = (state: RootState) =>
   state.recipes.isLoading;
 export const selectRecipesError = (state: RootState) => state.recipes.error;
+
+export const selectRecipeDetails = (state: RootState) =>
+  state.recipeDetails.item;
+export const selectRecipeDetailsIsLoading = (state: RootState) =>
+  state.recipeDetails.isRecipeLoading;
+export const selectRecipeDetailsError = (state: RootState) =>
+  state.recipeDetails.error;
+
+export const selectPopularRecipes = (state: RootState) =>
+  state.popularRecipes.items;
+export const selectPopularRecipesIsLoading = (state: RootState) =>
+  state.popularRecipes.isLoading;
+export const selectPopularRecipesError = (state: RootState) =>
+  state.popularRecipes.error;

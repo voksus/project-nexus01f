@@ -13,6 +13,7 @@ const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
 );
+const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage.tsx"));
 
 const PagePlaceholder = ({ title }: { title: string }) => (
   <main className="container" style={{ padding: "48px 16px" }}>
@@ -39,10 +40,7 @@ export const App = () => {
 
         <Route element={<SharedLayout headerTheme="light" />}>
           {/* [FE-07]: RecipePage */}
-          <Route
-            path="/recipe/:id"
-            element={<PagePlaceholder title="Recipe Page" />}
-          />
+          <Route path="/recipe/:id" element={<RecipePage />} />
 
           {/* [FE-08]: AddRecipePage (канонічний шлях /recipe/add + редірект з /add за рішенням #6) */}
           <Route

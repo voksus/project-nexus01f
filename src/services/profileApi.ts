@@ -162,6 +162,27 @@ export const getUserProfile = async (
   return read(data, isPublicProfile, path);
 };
 
+export interface UpdatedProfile {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string | null;
+}
+
+const isUpdatedProfile = (value: unknown): value is UpdatedProfile =>
+  isRecord(value) &&
+  typeof value.id === "string" &&
+  typeof value.name === "string" &&
+  typeof value.email === "string" &&
+  isNullableString(value.avatar);
+
+export const updateProfileName = async (
+  name: string,
+): Promise<UpdatedProfile> => {
+  const { data } = await api.patch<unknown>("/users/profile", { name });
+  return read(data, isUpdatedProfile, "/users/profile");
+};
+
 export const updateAvatar = async (
   file: File,
 ): Promise<{ avatar: string | null }> => {

@@ -27,6 +27,7 @@ interface UserInfoProps {
   onAvatarRejected: (message: string) => void;
   onFollowToggle: () => void;
   onLogout: () => void;
+  onEditName?: () => void;
 }
 
 export const UserInfo = ({
@@ -45,6 +46,7 @@ export const UserInfo = ({
   onAvatarRejected,
   onFollowToggle,
   onLogout,
+  onEditName,
 }: UserInfoProps) => {
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -110,7 +112,19 @@ export const UserInfo = ({
             </>
           ) : null}
         </div>
-        <h2 className={styles.name}>{name}</h2>
+        <div className={styles.nameRow}>
+          <h2 className={styles.name}>{name}</h2>
+          {isOwn && onEditName ? (
+            <button
+              type="button"
+              className={styles.editName}
+              aria-label="Edit name"
+              onClick={onEditName}
+            >
+              <Icon name="edit" className={styles.editIcon} />
+            </button>
+          ) : null}
+        </div>
         <dl className={styles.stats}>
           {stats.map((stat) => (
             <div key={stat.label} className={styles.stat}>

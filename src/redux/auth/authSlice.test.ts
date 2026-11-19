@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 import type { AuthUser } from "../../types/auth.ts";
 import { sessionCleared } from "../sessionActions.ts";
-import { authReducer, avatarUpdated, sessionReceived } from "./authSlice.ts";
+import {
+  authReducer,
+  avatarUpdated,
+  sessionReceived,
+  userProfileUpdated,
+} from "./authSlice.ts";
 
 const user: AuthUser = {
   id: "user-1",
@@ -11,6 +16,21 @@ const user: AuthUser = {
 };
 
 const signedOut = authReducer(undefined, { type: "unknown" });
+
+describe("userProfileUpdated", () => {
+  it("replaces only the name of the signed-in user", () => {
+    const signedIn = authReducer(signedOut, sessionReceived(user));
+    const next = authReducer(signedIn, userProfileUpdated("Ada"));
+
+    expect(next.user).toEqual({ ...user, name: "Ada" });
+  });
+
+  it("does nothing when nobody is signed in", () => {
+    const next = authReducer(signedOut, userProfileUpdated("Ada"));
+
+    expect(next.user).toBeNull();
+  });
+});
 
 describe("avatarUpdated", () => {
   it("replaces only the avatar of the signed-in user", () => {

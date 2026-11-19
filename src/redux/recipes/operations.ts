@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getRecipes } from "../../services/recipesApi.ts";
+import { getRecipeById, getRecipes } from "../../services/recipesApi.ts";
 import type {
   PaginatedResponse,
   RecipeCardItem,
+  RecipeDetails,
   RecipesQuery,
 } from "../../types/api.ts";
 import { getErrorMessage } from "../../utils/getErrorMessage.ts";
@@ -18,5 +19,17 @@ export const fetchRecipes = createAsyncThunk<
     return rejectWithValue(
       getErrorMessage(error, "Unable to load recipes. Please try again."),
     );
+  }
+});
+
+export const fetchRecipeById = createAsyncThunk<
+  RecipeDetails,
+  string,
+  { rejectValue: string }
+>("recipes/fetchRecipeById", async (id, { rejectWithValue, signal }) => {
+  try {
+    return await getRecipeById(id, signal);
+  } catch (error) {
+    return rejectWithValue(getErrorMessage(error, "Unable to load recipe."));
   }
 });

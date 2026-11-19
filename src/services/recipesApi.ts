@@ -2,6 +2,7 @@ import type {
   CreatedRecipe,
   PaginatedResponse,
   RecipeCardItem,
+  RecipeDetails,
   RecipesQuery,
 } from "../types/api.ts";
 import { api } from "./api.ts";
@@ -43,4 +44,34 @@ export const addRecipeToFavorites = async (recipeId: string) => {
 
 export const removeRecipeFromFavorites = async (recipeId: string) => {
   await api.delete(`/recipes/${encodeURIComponent(recipeId)}/favorite`);
+};
+
+export const getRecipeById = async (
+  recipeId: string,
+  signal?: AbortSignal,
+): Promise<RecipeDetails> => {
+  const { data } = await api.get<RecipeDetails>(
+    `/recipes/${encodeURIComponent(recipeId)}`,
+    { signal },
+  );
+  return data;
+};
+
+export const getPopularRecipes = async (
+  limit = 4,
+  signal?: AbortSignal,
+): Promise<RecipeCardItem[]> => {
+  const { data } = await api.get<
+    RecipeCardItem[] | { items?: RecipeCardItem[]; recipes?: RecipeCardItem[] }
+  >("/recipes/popular", {
+    params: { limit },
+    signal,
+  });
+
+  if (Array.isArray(data)) {
+    return data.slice(0, limit);
+  }
+
+  const list = data.items ?? data.recipes ?? [];
+  return list.slice(0, limit);
 };

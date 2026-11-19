@@ -6,6 +6,7 @@ import { SharedLayout } from "./components/SharedLayout/SharedLayout.tsx";
 import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
+import { RecipePage } from "./pages/RecipePage/RecipePage.tsx";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const AddRecipePage = lazy(
@@ -40,10 +41,7 @@ export const App = () => {
 
         <Route element={<SharedLayout headerTheme="light" />}>
           {/* [FE-07]: RecipePage */}
-          <Route
-            path="/recipe/:id"
-            element={<PagePlaceholder title="Recipe Page" />}
-          />
+          <Route path="/recipe/:id" element={<RecipePage />} />
 
           {/* [FE-08]: AddRecipePage (канонічний шлях /recipe/add + редірект з /add за рішенням #6) */}
           <Route

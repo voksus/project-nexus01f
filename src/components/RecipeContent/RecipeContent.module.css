@@ -1,0 +1,317 @@
+/* Основний блок рецепту */
+.recipeDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  margin-top: 32px;
+}
+
+/* Блок із фото */
+.recipeDetailsMedia {
+  width: 100%;
+}
+
+.recipeDetailsImage {
+  display: block;
+  width: 100%;
+  height: 318px;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+/* Блок із контентом */
+.recipeDetailsContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.recipeDetailsHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.recipeDetailsTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3333; /* 24px */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--color-black);
+}
+
+.recipeDetailsMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recipeDetailsTag {
+  padding: 10px 14px;
+  border: 1px solid var(--color-gray);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  color: var(--color-gray);
+}
+
+.recipeDetailsDescription,
+.recipeDetailsInstructions {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43; /* 20px */
+  letter-spacing: -0.02em;
+  color: var(--color-dark);
+}
+
+/* Блок автора */
+.recipeAuthor {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.recipeAuthorAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.recipeAuthorInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipeAuthorLabel {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5; /* 18px */
+  letter-spacing: -0.02em;
+  color: var(--color-gray);
+}
+
+.recipeAuthorName {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43; /* 20px */
+  letter-spacing: -0.02em;
+  color: var(--color-dark);
+}
+
+/* Внутрішні секції (Ingredients, Recipe Preparation) */
+.recipeDetailsBlock {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.recipeDetailsSubtitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3333; /* 24px */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+/* Список інгредієнтів (2 колонки на мобільному, вирівнювання вліво) */
+.ingredientsList {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ingredientsListItem {
+  flex: 0 0 calc((100% - 16px) / 2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.ingredientsListThumb {
+  flex-shrink: 0;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid var(--color-gray);
+  border-radius: 15px;
+}
+
+.ingredientsListImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ingredientsListInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ingredientsListName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.43; /* 20px */
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+}
+
+.ingredientsListMeasure {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5; /* 18px */
+  letter-spacing: -0.02em;
+  color: var(--color-gray);
+}
+
+/* Абзаци приготування */
+.recipeDetailsInstructionsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Кнопка Add to favorites */
+.recipeDetailsFavBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 13px 19px;
+  border: 1px solid var(--color-gray);
+  border-radius: 30px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.43; /* 20px */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-dark);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.recipeDetailsFavBtn:hover,
+.recipeDetailsFavBtn:focus-visible {
+  background-color: var(--color-dark);
+  border-color: var(--color-dark);
+  color: var(--color-white);
+}
+
+/* ==================== ПЛАНШЕТ (від 768px) ==================== */
+@media (min-width: 768px) {
+  .recipeDetails {
+    gap: 40px;
+    margin-top: 32px;
+  }
+
+  .recipeDetailsImage {
+    height: 400px;
+  }
+
+  .recipeDetailsContent {
+    gap: 40px;
+  }
+
+  .recipeDetailsTitle {
+    font-size: 24px;
+    line-height: 1.1667; /* 28px */
+  }
+
+  .recipeDetailsSubtitle {
+    font-size: 20px;
+    line-height: 1.2; /* 24px */
+  }
+
+  .recipeDetailsDescription,
+  .recipeDetailsInstructions,
+  .recipeAuthorName,
+  .ingredientsListName {
+    font-size: 16px;
+    line-height: 1.5; /* 24px */
+  }
+
+  .recipeAuthorAvatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .recipeAuthorLabel,
+  .ingredientsListMeasure {
+    font-size: 14px;
+    line-height: 1.29; /* 18px */
+  }
+
+  .ingredientsList {
+    gap: 20px;
+  }
+
+  .ingredientsListItem {
+    flex: 0 0 calc((100% - 40px) / 3);
+    width: 178px;
+    gap: 14px;
+  }
+
+  .ingredientsListThumb {
+    width: 90px;
+    height: 90px;
+    padding: 15px;
+  }
+
+  .recipeDetailsFavBtn {
+    min-height: 56px;
+    padding: 15px 31px;
+    font-size: 16px;
+    line-height: 1.5; /* 24px */
+  }
+}
+
+/* ==================== ДЕСКТОП (від 1280px) ==================== */
+@media (min-width: 1280px) {
+  .recipeDetails {
+    flex-direction: row;
+    gap: 80px;
+    margin-top: 40px;
+  }
+
+  .recipeDetailsMedia {
+    flex: 0 0 551px;
+    max-width: 551px;
+  }
+
+  .recipeDetailsContent {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+}

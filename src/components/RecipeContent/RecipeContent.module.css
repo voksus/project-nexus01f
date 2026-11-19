@@ -82,6 +82,7 @@
 }
 
 .recipeAuthorAvatar {
+  flex-shrink: 0;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -103,6 +104,7 @@
 }
 
 .recipeAuthorName {
+  text-align: left;
   font-size: 14px;
   font-weight: 700;
   line-height: 1.43; /* 20px */
@@ -143,6 +145,7 @@
 }
 
 .ingredientsListItem {
+  min-width: 0;
   flex: 0 0 calc((100% - 16px) / 2);
   display: flex;
   align-items: center;
@@ -169,6 +172,7 @@
 }
 
 .ingredientsListInfo {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -180,6 +184,7 @@
   line-height: 1.43; /* 20px */
   letter-spacing: -0.02em;
   color: var(--color-main);
+  overflow-wrap: anywhere;
 }
 
 .ingredientsListMeasure {
@@ -188,6 +193,7 @@
   line-height: 1.5; /* 18px */
   letter-spacing: -0.02em;
   color: var(--color-gray);
+  overflow-wrap: anywhere;
 }
 
 /* Абзаци приготування */
@@ -222,11 +228,16 @@
     border-color 0.2s ease;
 }
 
-.recipeDetailsFavBtn:hover,
-.recipeDetailsFavBtn:focus-visible {
+.recipeDetailsFavBtn:not(:disabled):hover,
+.recipeDetailsFavBtn:not(:disabled):focus-visible {
   background-color: var(--color-dark);
   border-color: var(--color-dark);
   color: var(--color-white);
+}
+
+.recipeDetailsFavBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* ==================== ПЛАНШЕТ (від 768px) ==================== */

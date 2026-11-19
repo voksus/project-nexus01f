@@ -66,7 +66,7 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
   return (
     <div>
       {/* PathInfo */}
-      <PathInfo className={styles.pathInfo} current={title} />
+      <PathInfo current={title} />
 
       {/* RecipeInfo */}
       <article className={styles.recipeDetails}>

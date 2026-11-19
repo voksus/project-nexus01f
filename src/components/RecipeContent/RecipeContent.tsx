@@ -88,10 +88,14 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
 
             <div className={styles.recipeDetailsMeta}>
               <span className={styles.recipeDetailsTag}>{category.name}</span>
-              <span className={styles.recipeDetailsTag}>{time} min</span>
+              {time != null && (
+                <span className={styles.recipeDetailsTag}>{time} min</span>
+              )}
             </div>
 
-            <p className={styles.recipeDetailsDescription}>{description}</p>
+            {description && (
+              <p className={styles.recipeDetailsDescription}>{description}</p>
+            )}
 
             <div className={styles.recipeAuthor}>
               <img

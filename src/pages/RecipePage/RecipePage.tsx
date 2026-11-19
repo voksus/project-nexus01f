@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { PopularRecipes } from "../../components/PopularRecipes/PopularRecipes.tsx";
 import { RecipeContent } from "../../components/RecipeContent/RecipeContent.tsx";
+import { Loader } from "../../components/ui/Loader/Loader.tsx";
+import { selectIsAuthenticated } from "../../redux/auth/selectors.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 import { fetchRecipeById } from "../../redux/recipes/operations.ts";
 import { resetRecipeDetails } from "../../redux/recipes/recipeDetailsSlice.ts";
@@ -19,28 +21,36 @@ export default function RecipePage() {
   const recipe = useAppSelector(selectRecipeDetails);
   const isRecipeLoading = useAppSelector(selectRecipeDetailsIsLoading);
   const error = useAppSelector(selectRecipeDetailsError);
+  const isAuthenticated = useAppSelector(selectIsAuthenticated);
+
+  useEffect(() => {
+    if (!id) return;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
 
   useEffect(() => {
     if (!id) return;
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    void isAuthenticated;
     const promise = dispatch(fetchRecipeById(id));
 
     return () => {
       promise.abort();
       dispatch(resetRecipeDetails());
     };
-  }, [dispatch, id]);
+  }, [dispatch, id, isAuthenticated]);
 
   return (
     <main className="container">
       <div className={styles.recipePage}>
-        {isRecipeLoading && <p>Loading recipe...</p>}
+        {isRecipeLoading && <Loader />}
 
         {!isRecipeLoading && error && (
-          <div>
-            <p>{error}</p>
-            <Link to="/">Back to Home</Link>
+          <div className={styles.errorWrap}>
+            <p className={styles.errorText}>{error}</p>
+            <Link className={styles.backLink} to="/">
+              Back to Home
+            </Link>
           </div>
         )}
 

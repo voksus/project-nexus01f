@@ -57,6 +57,11 @@
   background-color: var(--color-dark);
 }
 
+.logoutButton:disabled,
+.cancelButton:disabled {
+  opacity: 0.6;
+}
+
 .cancelButton {
   border: 1px solid var(--color-gray);
   background-color: transparent;

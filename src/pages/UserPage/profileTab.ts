@@ -24,8 +24,8 @@ export const tabsFor = (kind: ProfileKind): ProfileTab[] =>
   kind === "own" ? OWN_TABS : OTHER_TABS;
 
 export const tabLabel = (kind: ProfileKind, tab: ProfileTab): string => {
-  if (tab === "recipes") return kind === "own" ? "My recipes" : "recipes";
-  if (tab === "favorites") return "my favorites";
+  if (tab === "recipes") return kind === "own" ? "My recipes" : "Recipes";
+  if (tab === "favorites") return "My favorites";
   if (tab === "followers") return "Followers";
   return "Following";
 };

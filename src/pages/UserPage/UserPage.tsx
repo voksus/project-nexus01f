@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { LogOutModal } from "../../components/auth/LogOutModal/LogOutModal.tsx";
 import { Loader } from "../../components/ui/Loader/Loader.tsx";
 import { MainTitle } from "../../components/ui/MainTitle/MainTitle.tsx";
 import { PathInfo } from "../../components/ui/PathInfo/PathInfo.tsx";
 import { Subtitle } from "../../components/ui/Subtitle/Subtitle.tsx";
 import { avatarUpdated } from "../../redux/auth/authSlice.ts";
-import { logout } from "../../redux/auth/operations.ts";
 import { selectUser } from "../../redux/auth/selectors.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 import {
@@ -18,7 +18,6 @@ import {
 } from "../../services/profileApi.ts";
 import type { CurrentUserProfile, PublicUserProfile } from "../../types/api.ts";
 import { ProfileList } from "./ProfileList.tsx";
-import { TemporaryLogOutDialog } from "./TemporaryLogOutDialog.tsx";
 import { UserInfo } from "./UserInfo.tsx";
 import styles from "./UserPage.module.css";
 
@@ -199,15 +198,6 @@ const UserPage = () => {
               kind={page.kind}
               userId={page.profile.id}
               currentUserId={currentUserId}
-              ownerFollowing={
-                page.kind === "other"
-                  ? page.profile.isFollowing === true
-                  : undefined
-              }
-              ownerPending={pending}
-              onOwnerFollowToggle={() => {
-                void handleFollowToggle();
-              }}
               onRecipeRemoved={(removedTab) => {
                 setPage((current) => {
                   if (current.status !== "ready" || current.kind !== "own") {
@@ -271,13 +261,7 @@ const UserPage = () => {
         </div>
       ) : null}
 
-      <TemporaryLogOutDialog
-        open={logoutOpen}
-        onCancel={() => setLogoutOpen(false)}
-        onConfirm={() => {
-          void dispatch(logout());
-        }}
-      />
+      {logoutOpen ? <LogOutModal onClose={() => setLogoutOpen(false)} /> : null}
     </main>
   );
 };

@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useCallback, useState } from "react";
 import { selectUser } from "../../redux/auth/selectors.ts";
 import { useAppSelector } from "../../redux/hooks.ts";
+import { useAuthModal } from "../auth/AuthModalContext.tsx";
 import { Icon } from "../ui/Icon/Icon.tsx";
 import { Logo } from "../ui/Logo/Logo.tsx";
 import { AuthBar } from "./AuthBar/AuthBar.tsx";
@@ -15,13 +16,9 @@ interface HeaderProps {
   theme: "dark" | "light";
 }
 
-// TODO [FE-04]: відкривати SignInModal / SignUpModal / LogOutModal
-const openSignIn = () => undefined;
-const openSignUp = () => undefined;
-const openLogOut = () => undefined;
-
 export const Header = ({ theme }: HeaderProps) => {
   const user = useAppSelector(selectUser);
+  const { activeModal, openSignIn, openSignUp, openLogOut } = useAuthModal();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
@@ -52,7 +49,11 @@ export const Header = ({ theme }: HeaderProps) => {
               </button>
             </>
           ) : (
-            <AuthBar onSignIn={openSignIn} onSignUp={openSignUp} />
+            <AuthBar
+              onSignIn={openSignIn}
+              onSignUp={openSignUp}
+              activeModal={activeModal}
+            />
           )}
         </div>
       </div>

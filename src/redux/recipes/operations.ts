@@ -1,8 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getRecipes } from "../../services/recipesApi.ts";
+import {
+  getPopularRecipes,
+  getRecipeById,
+  getRecipes,
+} from "../../services/recipesApi.ts";
 import type {
   PaginatedResponse,
   RecipeCardItem,
+  RecipeDetail,
   RecipesQuery,
 } from "../../types/api.ts";
 import { getErrorMessage } from "../../utils/getErrorMessage.ts";
@@ -17,6 +22,32 @@ export const fetchRecipes = createAsyncThunk<
   } catch (error) {
     return rejectWithValue(
       getErrorMessage(error, "Unable to load recipes. Please try again."),
+    );
+  }
+});
+
+export const fetchRecipeById = createAsyncThunk<
+  RecipeDetail,
+  string,
+  { rejectValue: string }
+>("recipes/fetchRecipeById", async (id, { rejectWithValue, signal }) => {
+  try {
+    return await getRecipeById(id, signal);
+  } catch (error) {
+    return rejectWithValue(getErrorMessage(error, "Unable to load recipe."));
+  }
+});
+
+export const fetchPopularRecipes = createAsyncThunk<
+  RecipeCardItem[],
+  void,
+  { rejectValue: string }
+>("popularRecipes/fetchAll", async (_, { rejectWithValue, signal }) => {
+  try {
+    return await getPopularRecipes(4, signal);
+  } catch (error) {
+    return rejectWithValue(
+      getErrorMessage(error, "Unable to load popular recipes."),
     );
   }
 });

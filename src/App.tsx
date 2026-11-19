@@ -4,8 +4,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthModalProvider } from "./components/auth/AuthModalContext.tsx";
 import { PrivateRoute } from "./components/auth/PrivateRoute.tsx";
 import { SharedLayout } from "./components/SharedLayout/SharedLayout.tsx";
-import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
-import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
 const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));
@@ -14,15 +12,7 @@ const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
 );
 const RecipePage = lazy(() => import("./pages/RecipePage/RecipePage.tsx"));
-
-const PagePlaceholder = ({ title }: { title: string }) => (
-  <main className="container" style={{ padding: "48px 16px" }}>
-    <MainTitle>{title}</MainTitle>
-    <Subtitle>
-      Page module will be connected according to Trello ticket.
-    </Subtitle>
-  </main>
-);
+const UserPage = lazy(() => import("./pages/UserPage/UserPage.tsx"));
 
 export const App = () => {
   useAuthLifecycle();
@@ -58,7 +48,7 @@ export const App = () => {
             path="/user/:id"
             element={
               <PrivateRoute>
-                <PagePlaceholder title="User Profile Page" />
+                <UserPage />
               </PrivateRoute>
             }
           />

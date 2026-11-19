@@ -46,6 +46,9 @@ const authSlice = createSlice({
     clearAuthError: (state) => {
       state.error = null;
     },
+    avatarUpdated: (state, action: PayloadAction<string | null>) => {
+      if (state.user) state.user.avatar = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(sessionCleared, () => ({
@@ -60,5 +63,6 @@ export const {
   requestStarted,
   requestFailed,
   clearAuthError,
+  avatarUpdated,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;

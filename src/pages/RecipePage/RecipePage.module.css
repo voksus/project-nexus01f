@@ -1,17 +1,22 @@
-.page {
+.recipePage {
+  display: flex;
+  flex-direction: column;
   padding-top: 64px;
   padding-bottom: 64px;
+  gap: 64px;
 }
 
 @media screen and (min-width: 768px) {
-  .page {
+  .recipePage {
+    gap: 100px;
     padding-bottom: 100px;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  .page {
+  .recipePage {
     padding-top: 80px;
     padding-bottom: 120px;
+    gap: 120px;
   }
 }

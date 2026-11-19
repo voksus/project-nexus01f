@@ -13,3 +13,10 @@ export const selectRecipeDetailsIsLoading = (state: RootState) =>
   state.recipeDetails.isLoading;
 export const selectRecipeDetailsError = (state: RootState) =>
   state.recipeDetails.error;
+
+export const selectPopularRecipes = (state: RootState) =>
+  state.popularRecipes.items;
+export const selectPopularRecipesIsLoading = (state: RootState) =>
+  state.popularRecipes.isLoading;
+export const selectPopularRecipesError = (state: RootState) =>
+  state.popularRecipes.error;

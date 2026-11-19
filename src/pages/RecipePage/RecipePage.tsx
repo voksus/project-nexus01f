@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { PopularRecipes } from "../../components/PopularRecipes/PopularRecipes.tsx";
 import { RecipeContent } from "../../components/RecipeContent/RecipeContent.tsx";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks.ts";
 import { fetchRecipeById } from "../../redux/recipes/operations.ts";
@@ -33,18 +34,20 @@ export const RecipePage = () => {
   }, [dispatch, id]);
 
   return (
-    <main className={clsx("container", styles.page)}>
-      {isLoading && <p>Loading recipe...</p>}
+    <main className={clsx("container")}>
+      <div className={styles.recipePage}>
+        {isLoading && <p>Loading recipe...</p>}
 
-      {!isLoading && error && (
-        <div>
-          <p>{error}</p>
-          <Link to="/">Back to Home</Link>
-        </div>
-      )}
+        {!isLoading && error && (
+          <div>
+            <p>{error}</p>
+            <Link to="/">Back to Home</Link>
+          </div>
+        )}
 
-      {!isLoading && !error && recipe && <RecipeContent recipe={recipe} />}
-      {/* <PopularRecipes /> */}
+        {!isLoading && !error && recipe && <RecipeContent recipe={recipe} />}
+        <PopularRecipes />
+      </div>
     </main>
   );
 };

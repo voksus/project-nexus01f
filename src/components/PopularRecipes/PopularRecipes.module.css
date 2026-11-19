@@ -1,0 +1,69 @@
+.popularRecipes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.popularRecipesTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.3333; /* 24px */
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--color-black);
+}
+
+/* Список карток (1 колонка на мобільному, Gap: 32px) */
+.popularRecipesList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.popularRecipesItem {
+  width: 100%;
+  min-width: 0;
+}
+
+/* ==================== ПЛАНШЕТ (від 768px) ==================== */
+@media (min-width: 768px) {
+  .popularRecipes {
+    gap: 40px;
+  }
+
+  .popularRecipesTitle {
+    font-size: 24px;
+    line-height: 1.1667; /* 28px */
+  }
+
+  .popularRecipesList {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px 20px;
+  }
+
+  .popularRecipesItem {
+    flex: 0 0 calc((100% - 20px) / 2);
+    width: auto;
+  }
+}
+
+/* ==================== ДЕСКТОП (від 1280px) ==================== */
+@media (min-width: 1280px) {
+  .popularRecipesList {
+    gap: 20px;
+  }
+
+  .popularRecipesItem {
+    flex: 0 0 calc((100% - 60px) / 4);
+  }
+}

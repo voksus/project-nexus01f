@@ -361,6 +361,7 @@ export const ProfileList = ({
                 <RecipePreview
                   recipe={recipe}
                   canDelete={kind === "own"}
+                  canEdit={kind === "own" && tab === "recipes"}
                   deleteLabel={deleteLabel}
                   pending={deletingId === recipe.id}
                   onDelete={setPendingDelete}

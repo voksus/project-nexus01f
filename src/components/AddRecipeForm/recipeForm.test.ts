@@ -2,6 +2,7 @@ import { AxiosError, AxiosHeaders } from "axios";
 import { describe, expect, it } from "vitest";
 import { ValidationError } from "yup";
 import {
+  editRecipeSchema,
   initialRecipeValues,
   parseSubmitError,
   parseTimeInput,
@@ -180,6 +181,19 @@ describe("toRecipeFormData", () => {
     ]);
     expect(formData.get("thumb")).toBeInstanceOf(File);
     expect((formData.get("thumb") as File).name).toBe("salad.png");
+  });
+
+  it("omits the photo when the existing one stays", () => {
+    const formData = toRecipeFormData({ ...validValues, thumb: null });
+    expect(formData.get("thumb")).toBeNull();
+  });
+});
+
+describe("editRecipeSchema", () => {
+  it("keeps the current photo when no new file is chosen", async () => {
+    await expect(
+      editRecipeSchema.validate({ ...validValues, thumb: null }),
+    ).resolves.toMatchObject({ title: "Salmon avocado salad" });
   });
 });
 

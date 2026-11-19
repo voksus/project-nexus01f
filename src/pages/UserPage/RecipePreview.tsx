@@ -8,6 +8,7 @@ const RECIPE_PLACEHOLDER = "/images/placeholders/recipe.svg";
 interface RecipePreviewProps {
   recipe: RecipeCardItem;
   canDelete: boolean;
+  canEdit: boolean;
   deleteLabel: string;
   pending: boolean;
   onDelete: (id: string) => void;
@@ -16,6 +17,7 @@ interface RecipePreviewProps {
 export const RecipePreview = ({
   recipe,
   canDelete,
+  canEdit,
   deleteLabel,
   pending,
   onDelete,
@@ -54,6 +56,15 @@ export const RecipePreview = ({
           >
             <Icon name="arrow-up-right" className={styles.icon} />
           </Link>
+          {canEdit ? (
+            <Link
+              className={styles.iconButton}
+              to={`/recipe/${recipe.id}/edit`}
+              aria-label={`Edit recipe ${recipe.title}`}
+            >
+              <Icon name="edit" className={styles.icon} />
+            </Link>
+          ) : null}
           {canDelete ? (
             <button
               type="button"

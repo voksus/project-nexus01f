@@ -9,6 +9,9 @@ import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
 const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));
+const EditRecipePage = lazy(
+  () => import("./pages/EditRecipePage/EditRecipePage.tsx"),
+);
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
@@ -39,6 +42,16 @@ export const App = () => {
         </Route>
 
         <Route element={<SharedLayout headerTheme="light" />}>
+          {/* [FE-10]: edit own recipe. Static /recipe/add stays a separate route. */}
+          <Route
+            path="/recipe/:id/edit"
+            element={
+              <PrivateRoute>
+                <EditRecipePage />
+              </PrivateRoute>
+            }
+          />
+
           {/* [FE-07]: RecipePage */}
           <Route
             path="/recipe/:id"

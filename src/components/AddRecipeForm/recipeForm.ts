@@ -44,11 +44,15 @@ export const initialRecipeValues: RecipeFormValues = {
   instructions: "",
 };
 
-export const recipeSchema: ObjectSchema<RecipeFormValues> = object({
-  thumb: mixed<File>()
+const thumbSchema = (required: boolean) =>
+  mixed<File>()
     .nullable()
     .defined()
-    .test("required", "Add a photo of the dish", (file) => file instanceof File)
+    .test(
+      "required",
+      "Add a photo of the dish",
+      (file) => !required || file instanceof File,
+    )
     .test(
       "type",
       "Use a JPEG, PNG or WebP image",
@@ -58,7 +62,10 @@ export const recipeSchema: ObjectSchema<RecipeFormValues> = object({
       "size",
       "The photo must be 5 MB or smaller",
       (file) => !file || file.size <= THUMB_MAX_BYTES,
-    ),
+    );
+
+export const recipeSchema: ObjectSchema<RecipeFormValues> = object({
+  thumb: thumbSchema(true),
   title: string()
     .trim()
     .required("Enter the recipe name")
@@ -94,6 +101,11 @@ export const recipeSchema: ObjectSchema<RecipeFormValues> = object({
     .required("Describe how to cook the dish")
     .max(INSTRUCTIONS_MAX, `Use at most ${INSTRUCTIONS_MAX} characters`),
 });
+
+export const editRecipeSchema: ObjectSchema<RecipeFormValues> =
+  recipeSchema.shape({
+    thumb: thumbSchema(false),
+  });
 
 export const clampTime = (minutes: number) =>
   Math.min(TIME_MAX, Math.max(TIME_MIN, Math.round(minutes)));
@@ -141,6 +153,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 /** Maps a backend ErrorResponse to a message and field errors */
 export const parseSubmitError = (
   error: unknown,
+  fallback = "Unable to publish the recipe. Please try again.",
 ): { message: string; fieldErrors: RecipeFormErrors } => {
   const fieldErrors: RecipeFormErrors = {};
   const data: unknown = axios.isAxiosError(error)
@@ -161,7 +174,7 @@ export const parseSubmitError = (
   const message =
     isRecord(data) && typeof data.message === "string" && data.message
       ? data.message
-      : "Unable to publish the recipe. Please try again.";
+      : fallback;
 
   return { message, fieldErrors };
 };

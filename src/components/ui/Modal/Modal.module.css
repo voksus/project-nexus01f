@@ -1,0 +1,79 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: var(--backdrop-bg);
+  animation: modal-fade-in var(--transition-fast);
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 343px;
+  margin: auto;
+  padding: 60px 30px;
+  border-radius: var(--radius-card);
+  background-color: var(--color-white);
+  box-shadow: 0 10px 40px rgba(5, 5, 5, 0.15);
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--color-main);
+  transition: opacity var(--transition-fast);
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+  opacity: 0.7;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    max-width: 560px;
+    padding: 80px;
+    border-radius: var(--radius-lg);
+  }
+
+  .closeButton {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop {
+    animation: none;
+  }
+
+  .closeButton {
+    transition: none;
+  }
+}

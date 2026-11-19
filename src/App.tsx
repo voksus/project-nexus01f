@@ -1,12 +1,14 @@
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { AuthModalProvider } from "./components/auth/AuthModalContext.tsx";
 import { PrivateRoute } from "./components/auth/PrivateRoute.tsx";
 import { SharedLayout } from "./components/SharedLayout/SharedLayout.tsx";
 import { MainTitle } from "./components/ui/MainTitle/MainTitle.tsx";
 import { Subtitle } from "./components/ui/Subtitle/Subtitle.tsx";
 import { useAuthLifecycle } from "./hooks/useAuthLifecycle.ts";
 
+const AddRecipePage = lazy(() => import("./pages/AddRecipePage/AddRecipePage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage.tsx"));
 const NotFoundPage = lazy(
   () => import("./pages/NotFoundPage/NotFoundPage.tsx"),
@@ -25,7 +27,7 @@ const PagePlaceholder = ({ title }: { title: string }) => (
 export const App = () => {
   useAuthLifecycle();
   return (
-    <>
+    <AuthModalProvider>
       <Toaster position="top-right" />
       <Routes>
         {/* Темний Header: сторінки, що починаються з чорного блоку */}
@@ -48,7 +50,7 @@ export const App = () => {
             path="/recipe/add"
             element={
               <PrivateRoute>
-                <PagePlaceholder title="Add Recipe Page" />
+                <AddRecipePage />
               </PrivateRoute>
             }
           />
@@ -65,7 +67,7 @@ export const App = () => {
           />
         </Route>
       </Routes>
-    </>
+    </AuthModalProvider>
   );
 };
 

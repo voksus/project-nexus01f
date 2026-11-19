@@ -76,6 +76,11 @@ export interface RecipeIngredientDetail {
   measure: string | null;
 }
 
+/** POST /api/recipes response; only the id is needed */
+export interface CreatedRecipe {
+  id: string;
+}
+
 export interface RecipeDetail extends RecipeCardItem {
   instructions: string;
   category: Category;
@@ -102,4 +107,12 @@ export interface Testimonial {
   id: string;
   testimonial: string;
   owner: UserShort;
+}
+
+export interface RecipesQuery {
+  category?: string;
+  ingredient?: string;
+  area?: string;
+  page: number;
+  limit: number;
 }

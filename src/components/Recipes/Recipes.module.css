@@ -1,0 +1,160 @@
+.section {
+  scroll-margin-top: 16px;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+  transition: opacity var(--transition-fast);
+}
+
+.backButton:hover,
+.backButton:focus-visible {
+  opacity: 0.6;
+}
+
+.backIcon {
+  width: 16px;
+  height: 16px;
+  transform: rotate(-135deg);
+}
+
+.subtitle {
+  max-width: 540px;
+  color: var(--color-dark);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+  transition: opacity var(--transition-fast);
+}
+
+.list[data-loading="true"] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 610px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  color: var(--text-lighten);
+}
+
+.messageButton {
+  padding: 12px 28px;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-main);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.messageButton:hover,
+.messageButton:focus-visible {
+  border-color: var(--color-main);
+  background-color: var(--color-main);
+  color: var(--color-white);
+}
+
+@media screen and (min-width: 768px) {
+  .inner {
+    gap: 40px;
+  }
+
+  .header {
+    gap: 20px;
+  }
+
+  .backButton {
+    gap: 6px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .backIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .content {
+    gap: 40px;
+  }
+
+  .results {
+    gap: 60px;
+  }
+
+  .list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px 20px;
+  }
+
+  .message {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .results {
+    flex: 1;
+  }
+
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

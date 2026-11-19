@@ -107,17 +107,3 @@ export interface RecipesQuery {
   page: number;
   limit: number;
 }
-
-export interface RecipeDetails {
-  id: string;
-  title: string;
-  description: string;
-  instructions: string;
-  thumb: string;
-  time: string;
-  category: Category;
-  area: Area;
-  owner: UserShort;
-  ingredients: RecipeIngredientDetail[];
-  isFavorite: boolean;
-}

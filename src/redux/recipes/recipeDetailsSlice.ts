@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { RecipeDetails } from "../../types/api.ts";
+import type { RecipeDetail } from "../../types/api.ts";
 import { fetchRecipeById } from "./operations.ts";
 
 interface RecipeDetailsState {
-  item: RecipeDetails | null;
+  item: RecipeDetail | null;
   isRecipeLoading: boolean;
   error: string | null;
 }

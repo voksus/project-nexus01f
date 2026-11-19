@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PathInfo } from "../../components/ui/PathInfo/PathInfo.tsx";
 import { useAuthGate } from "../../hooks/useAuthGate.ts";
 import { useFavorite } from "../../hooks/useFavorite.ts";
-import type { RecipeDetails } from "../../types/api.ts";
+import type { RecipeDetail } from "../../types/api.ts";
 import styles from "./RecipeContent.module.css";
 
 const AVATAR_PLACEHOLDER = "/images/placeholders/avatar.svg";
@@ -17,7 +17,7 @@ const withFallback =
   };
 
 interface RecipeContentProps {
-  recipe: RecipeDetails;
+  recipe: RecipeDetail;
 }
 
 export const RecipeContent = ({ recipe }: RecipeContentProps) => {
@@ -47,10 +47,21 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
     toggleFavorite();
   };
 
-  const instructionParagraphs = instructions
+  const seenCounts = new Map<string, number>();
+
+  const paragraphs = instructions
     .split(/\r?\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((text) => {
+      const occurrence = (seenCounts.get(text) ?? 0) + 1;
+      seenCounts.set(text, occurrence);
+
+      return {
+        id: `${text.slice(0, 32)}-${occurrence}`,
+        text,
+      };
+    });
 
   return (
     <div>
@@ -84,11 +95,13 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
 
             <div className={styles.recipeAuthor}>
               <img
+                className={styles.recipeAuthorAvatar}
                 src={owner.avatar || AVATAR_PLACEHOLDER}
                 alt={owner.name}
-                className={styles.recipeAuthorAvatar}
                 width="40"
                 height="40"
+                loading="lazy"
+                onError={withFallback(AVATAR_PLACEHOLDER)}
               />
               <div className={styles.recipeAuthorInfo}>
                 <span className={styles.recipeAuthorLabel}>Created by:</span>
@@ -105,7 +118,7 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
                     className={styles.recipeAuthorName}
                     type="button"
                     aria-label={`Open ${owner.name}'s profile`}
-                    onClick={openSignIn}
+                    onClick={() => openSignIn()}
                   >
                     {owner.name}
                   </button>
@@ -122,11 +135,11 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
                 <li className={styles.ingredientsListItem} key={ingredient.id}>
                   <div className={styles.ingredientsListThumb}>
                     <img
+                      className={styles.ingredientsListImg}
                       src={ingredient.img || INGREDIENT_PLACEHOLDER}
                       alt={ingredient.name}
                       loading="lazy"
                       onError={withFallback(INGREDIENT_PLACEHOLDER)}
-                      className={styles.ingredientsListImg}
                     />
                   </div>
                   <div className={styles.ingredientsListInfo}>
@@ -146,9 +159,9 @@ export const RecipeContent = ({ recipe }: RecipeContentProps) => {
           <section className={styles.recipeDetailsBlock}>
             <h2 className={styles.recipeDetailsSubtitle}>Recipe Preparation</h2>
             <div className={styles.recipeDetailsInstructionsWrap}>
-              {instructionParagraphs.map((paragraph) => (
-                <p className={styles.recipeDetailsInstructions} key={paragraph}>
-                  {paragraph}
+              {paragraphs.map(({ id, text }) => (
+                <p className={styles.recipeDetailsInstructions} key={id}>
+                  {text}
                 </p>
               ))}
             </div>

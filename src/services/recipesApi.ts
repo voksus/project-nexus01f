@@ -2,7 +2,7 @@ import type {
   CreatedRecipe,
   PaginatedResponse,
   RecipeCardItem,
-  RecipeDetails,
+  RecipeDetail,
   RecipesQuery,
 } from "../types/api.ts";
 import { api } from "./api.ts";
@@ -49,8 +49,8 @@ export const removeRecipeFromFavorites = async (recipeId: string) => {
 export const getRecipeById = async (
   recipeId: string,
   signal?: AbortSignal,
-): Promise<RecipeDetails> => {
-  const { data } = await api.get<RecipeDetails>(
+): Promise<RecipeDetail> => {
+  const { data } = await api.get<RecipeDetail>(
     `/recipes/${encodeURIComponent(recipeId)}`,
     { signal },
   );

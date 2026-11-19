@@ -7,7 +7,7 @@ import {
 import type {
   PaginatedResponse,
   RecipeCardItem,
-  RecipeDetails,
+  RecipeDetail,
   RecipesQuery,
 } from "../../types/api.ts";
 import { getErrorMessage } from "../../utils/getErrorMessage.ts";
@@ -27,7 +27,7 @@ export const fetchRecipes = createAsyncThunk<
 });
 
 export const fetchRecipeById = createAsyncThunk<
-  RecipeDetails,
+  RecipeDetail,
   string,
   { rejectValue: string }
 >("recipes/fetchRecipeById", async (id, { rejectWithValue, signal }) => {

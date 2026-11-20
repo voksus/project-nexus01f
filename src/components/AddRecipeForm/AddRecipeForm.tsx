@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useReferences } from "../../hooks/useReferences.ts";
 import { useAppSelector } from "../../redux/hooks.ts";
 import { selectIngredientsById } from "../../redux/references/selectors.ts";
-import { createRecipe } from "../../services/recipesApi.ts";
+import { createRecipe, updateRecipe } from "../../services/recipesApi.ts";
 import { CountedTextarea } from "../ui/CountedTextarea/CountedTextarea.tsx";
 import { Icon } from "../ui/Icon/Icon.tsx";
 import { Select } from "../ui/Select/Select.tsx";
@@ -17,6 +17,7 @@ import { ImagePicker } from "./ImagePicker/ImagePicker.tsx";
 import { IngredientsField } from "./IngredientsField/IngredientsField.tsx";
 import {
   DESCRIPTION_MAX,
+  editRecipeSchema,
   INSTRUCTIONS_MAX,
   initialRecipeValues,
   parseSubmitError,
@@ -72,7 +73,19 @@ const Field = ({
 const toOptions = (items: { id: string; name: string }[]) =>
   items.map(({ id, name }) => ({ value: id, label: name }));
 
-export const AddRecipeForm = () => {
+interface AddRecipeFormProps {
+  mode?: "create" | "edit";
+  recipeId?: string;
+  initialValues?: RecipeFormValues;
+  existingThumb?: string | null;
+}
+
+export const AddRecipeForm = ({
+  mode = "create",
+  recipeId,
+  initialValues = initialRecipeValues,
+  existingThumb = null,
+}: AddRecipeFormProps) => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   // Changing the key resets the ingredient draft along with resetForm
@@ -94,22 +107,36 @@ export const AddRecipeForm = () => {
     { setErrors }: FormikHelpers<RecipeFormValues>,
   ) => {
     try {
-      const recipe = await createRecipe(toRecipeFormData(values));
-      toast.success("Your recipe has been published");
+      const formData = toRecipeFormData(values);
+      const recipe =
+        mode === "edit" && recipeId
+          ? await updateRecipe(recipeId, formData)
+          : await createRecipe(formData);
+      toast.success(
+        mode === "edit"
+          ? "Your recipe has been updated"
+          : "Your recipe has been published",
+      );
       navigate(`/recipe/${recipe.id}`);
     } catch (error) {
       if (axios.isCancel(error)) return;
       // 429: the api interceptor already shows the rate-limit toast
       if (axios.isAxiosError(error) && error.response?.status === 429) return;
-      const { message, fieldErrors } = parseSubmitError(error);
+      const { message, fieldErrors } = parseSubmitError(
+        error,
+        mode === "edit"
+          ? "Unable to save the recipe. Please try again."
+          : undefined,
+      );
       setErrors(fieldErrors);
       toast.error(message);
     }
   };
 
   const formik = useFormik<RecipeFormValues>({
-    initialValues: initialRecipeValues,
-    validationSchema: recipeSchema,
+    initialValues,
+    enableReinitialize: mode === "edit",
+    validationSchema: mode === "edit" ? editRecipeSchema : recipeSchema,
     onSubmit: handleSubmit,
   });
 
@@ -173,6 +200,7 @@ export const AddRecipeForm = () => {
         <ImagePicker
           id="recipe-thumb"
           value={values.thumb}
+          existingUrl={existingThumb}
           onChange={(file) => {
             void setFieldValue("thumb", file);
             void setFieldTouched("thumb", true, false);
@@ -364,7 +392,13 @@ export const AddRecipeForm = () => {
             disabled={isSubmitting}
             aria-busy={isSubmitting || undefined}
           >
-            {isSubmitting ? "Publishing…" : "Publish"}
+            {isSubmitting
+              ? mode === "edit"
+                ? "Saving…"
+                : "Publishing…"
+              : mode === "edit"
+                ? "Save changes"
+                : "Publish"}
           </button>
         </div>
       </div>

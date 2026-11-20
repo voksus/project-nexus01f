@@ -49,6 +49,9 @@ const authSlice = createSlice({
     avatarUpdated: (state, action: PayloadAction<string | null>) => {
       if (state.user) state.user.avatar = action.payload;
     },
+    userProfileUpdated: (state, action: PayloadAction<string>) => {
+      if (state.user) state.user.name = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(sessionCleared, () => ({
@@ -64,5 +67,6 @@ export const {
   requestFailed,
   clearAuthError,
   avatarUpdated,
+  userProfileUpdated,
 } = authSlice.actions;
 export const authReducer = authSlice.reducer;
